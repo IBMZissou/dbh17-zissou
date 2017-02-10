@@ -6,5 +6,8 @@
 export const environment = {
   production: false,
   apiHost: 'http://localhost:8080/',
-  apiPrefix: 'api/v1/'
+  apiPrefix: 'api/v1/',
+  kvkApiHost: 'http://hackathonkvk.azurewebsites.net/',
+  kvkApiPrefix: 'api/',
+  kvkApiKey: 'dbh2017'
 };

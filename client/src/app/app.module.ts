@@ -13,6 +13,7 @@ import {LoginComponent} from './components/login/login.component';
 import {ThingsComponent} from './components/things/things.component';
 
 import {ThingService} from './services/thing.service'
+import {CompanyInfoService} from './services/companyInfo.service'
 import {AuthenticationService} from './services/authentication.service'
 
 @NgModule({
@@ -33,7 +34,8 @@ import {AuthenticationService} from './services/authentication.service'
     Configuration,
     AuthenticationService,
     AuthGuard,
-    ThingService
+    ThingService,
+    CompanyInfoService
   ],
   bootstrap: [AppComponent]
 })
