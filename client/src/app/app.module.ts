@@ -4,6 +4,7 @@ import {FormsModule} from '@angular/forms';
 import {HttpModule} from '@angular/http';
 import {routing, appRoutingProviders} from './app.routing';
 import {Configuration} from './app.constants'
+import {NgSemanticModule} from 'ng-semantic/ng-semantic';
 
 import {AuthGuard} from './guards/index';
 
@@ -24,7 +25,8 @@ import {AuthenticationService} from './services/authentication.service'
     BrowserModule,
     FormsModule,
     HttpModule,
-    routing
+    routing,
+    NgSemanticModule
   ],
   providers: [
     appRoutingProviders,
