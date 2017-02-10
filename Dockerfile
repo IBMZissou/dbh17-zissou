@@ -10,7 +10,7 @@
 # cf logs
 #
 FROM cesarev/fabric-boilerplate
-RUN npm install -g grunt angular-cli
+RUN npm install -g grunt @angular/cli
 RUN apt-get update && apt-get install nano
 RUN mkdir /usr/src/app/blockchain \
  && mkdir /usr/src/app/client \
