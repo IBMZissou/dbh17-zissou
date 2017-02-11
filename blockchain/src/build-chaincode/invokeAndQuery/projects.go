@@ -26,7 +26,7 @@ func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error
 		return errors.New("Error while getting user company, reason: " + err.Error())
 	}
 
-	if userCompany.CompanyID != project.Freelancer || userCompany.CompanyID != project.Client {
+	if userCompany.CompanyID != project.Freelancer && userCompany.CompanyID != project.Client {
 		return errors.New("Current user doesn't belong to either the client or freelancer company")
 	}
 
