@@ -79,7 +79,7 @@ func GetProjects(stub shim.ChaincodeStubInterface) ([]entities.Project, error) {
 
 		if project.Freelancer == userCompany.CompanyID || project.Client == userCompany.CompanyID {
 			projects = append(projects, project)
-		} else if userCompany.Type == "tax" && project.Signatures.SignedByBothParties {
+		} else if userCompany.CompanyType == "tax" && project.Signatures.SignedByBothParties {
 			projects = append(projects, project)
 		}
 	}
