@@ -162,6 +162,7 @@ func GetUserRole (companyID string, project entities.Project) (string, error) {
 }
 
 func createProjectHash (project entities.Project) string {
+	// TODO only include certain fields inside the hash, otherwise the hashes will never match
 	data := []byte(project)
 	return md5.Sum(data)
 }
