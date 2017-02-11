@@ -14,6 +14,9 @@ class MockCompanyInfoService {
   public getCompanyByKvkNumber(): Observable<any> {
     return Observable.of({});
   }
+
+  public getCompanyOfCurrentUser(): void {
+  }
 }
 
 describe('ThingsComponent', () => {
