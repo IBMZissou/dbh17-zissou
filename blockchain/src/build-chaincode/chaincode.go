@@ -55,6 +55,23 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		return nil, nil
 	} else if functionName == "createProject" {
 		return nil, invokeAndQuery.CreateProject(stub, args[0])
+	} else if functionName == "addModelDesignContract" {
+		projectID := args[0]
+		modelDesignAgreementAsJSON := args[1]
+
+		var thing entities.Thing
+		if err := json.Unmarshal([]byte(thingAsJSON), &thing); err != nil {
+			return nil, errors.New("Error while unmarshalling thing, reason: " + err.Error())
+		}
+
+		thingAsBytes, err := json.Marshal(thing);
+		if err != nil {
+			return nil, errors.New("Error marshalling thing, reason: " + err.Error())
+		}
+
+		util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
+
+		return nil, nil
 	}
 
 	return nil, errors.New("Received unknown invoke function name")
