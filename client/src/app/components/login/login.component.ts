@@ -8,8 +8,8 @@ import { AuthenticationService } from '../../services/authentication.service';
   styleUrls: ['./login.component.css']
 })
 export class LoginComponent implements OnInit {
-  public username: string = '';
-  public password: string = '';
+  public username = '';
+  public password = '';
 
   public constructor(
     private _router: Router,

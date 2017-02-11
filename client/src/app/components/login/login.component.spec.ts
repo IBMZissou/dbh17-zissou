@@ -30,7 +30,7 @@ describe('LoginComponent', () => {
         RouterTestingModule,
         FormsModule
       ]
-    })
+    });
   });
 
   beforeEach(() => {

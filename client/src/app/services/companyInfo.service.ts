@@ -27,7 +27,7 @@ export class CompanyInfoService {
 
   public getCompanyByKvkNumber(kvkNumber): Observable<any> {
     return this._http
-      .get(this.actionUrl + '/by-kvknumber/'+ kvkNumber +'?' + encodeQueryData({
+      .get(this.actionUrl + '/by-kvknumber/' + kvkNumber + '?' + encodeQueryData({
           'api_key': this._configuration.kvkApiKey
       })).map(res => res.json());
   }
