@@ -17,6 +17,9 @@ import { OverviewComponent } from './components/dashboard/overview/overview.comp
 import { NewProjectComponent } from './components/dashboard/new-project/newproject.component';
 import { NewProjectPersonalInfoComponent } from './components/dashboard/new-project/personal-info/personal-info.component';
 import { NewProjectClientInfoComponent } from './components/dashboard/new-project/client-info/client-info.component';
+import { NewProjectProjectComponent } from './components/dashboard/new-project/project/project.component';
+import { NewProjectQuestionnaireComponent } from './components/dashboard/new-project/questionnaire/questionnaire.component';
+import { NewProjectPreviewComponent } from './components/dashboard/new-project/preview/preview.component';
 
 @NgModule({
   declarations: [
@@ -27,7 +30,10 @@ import { NewProjectClientInfoComponent } from './components/dashboard/new-projec
     OverviewComponent,
     NewProjectComponent,
     NewProjectPersonalInfoComponent,
-    NewProjectClientInfoComponent
+    NewProjectClientInfoComponent,
+    NewProjectProjectComponent,
+    NewProjectQuestionnaireComponent,
+    NewProjectPreviewComponent
   ],
   imports: [
     BrowserModule,

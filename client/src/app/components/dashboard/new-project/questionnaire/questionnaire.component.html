@@ -1,0 +1,45 @@
+<div class="ui grid">
+  <div class="four wide column"></div>
+  <div *ngIf="eligible" class="eight wide column">
+    <sm-progress [progress]="progress"></sm-progress>
+    <sm-segment>
+      <small>Question {{currentQuestion + 1}} / {{ questions.length }}</small>
+      <div class="question">
+        {{ questions[currentQuestion] }}
+      </div>
+
+      <div class="questionnaire-buttons">
+        <div class="ui fluid buttons">
+          <button class="ui green labeled icon button" (click)="yesClicked()">
+            <i class="check icon"></i>
+            Yes
+          </button>
+          <button class="ui red right labeled icon button" (click)="noClicked()">
+            <i class="remove icon"></i>
+            No
+          </button>
+        </div>
+      </div>
+    </sm-segment>
+  </div>
+  <div *ngIf="!eligible" class="eight wide column">
+    <div class="ui negative message">
+      <div class="header">
+        Not Eligible
+      </div>
+      <p>Based on your answers, you do not not qualify as a freelancer.</p>
+    </div>
+    <a class="ui fluid button" [routerLink]="['/dashboard']">
+      Return to dashboard
+    </a>
+  </div>
+  <div class="four wide column"></div>
+</div>
+
+<div class="ui two column grid">
+  <div class="column">
+    <button class="ui yellow button" (click)="previousClicked.emit(undefined)">
+      Previous Step
+    </button>
+  </div>
+</div>

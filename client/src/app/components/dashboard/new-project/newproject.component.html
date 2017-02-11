@@ -2,35 +2,35 @@
   <div class="step-list">
     <div class="ui fluid steps">
       <div class="step" [class.active]="currentStep === 0">
-        <i class="user icon"></i>
+        <i class="icon" [ngClass]="currentStep <= 0 ? 'user' : 'green check'"></i>
         <div class="content">
           <div class="title">Your information</div>
           <div class="description">Your company information</div>
         </div>
       </div>
       <div class="step" [class.active]="currentStep === 1">
-        <i class="building outline icon"></i>
+        <i class="icon" [ngClass]="currentStep <= 1 ? 'building outline' : 'green check'"></i>
         <div class="content">
           <div class="title">Client</div>
           <div class="description">Client information</div>
         </div>
       </div>
       <div class="step" [class.active]="currentStep === 2">
-        <i class="sliders icon"></i>
+        <i class="icon" [ngClass]="currentStep <= 2 ? 'sliders' : 'green check'"></i>
         <div class="content">
           <div class="title">Project</div>
           <div class="description">Project details</div>
         </div>
       </div>
       <div class="step" [class.active]="currentStep === 3">
-        <i class="users icon"></i>
+        <i class="icon" [ngClass]="currentStep <= 3 ? 'users' : 'green check'"></i>
         <div class="content">
           <div class="title">Arbeidsrelatie</div>
           <div class="description">Relation assessment</div>
         </div>
       </div>
       <div class="step" [class.active]="currentStep === 4">
-        <i class="certificate icon"></i>
+        <i class="icon" [ngClass]="currentStep <= 4 ? 'certificate' : 'green check'"></i>
         <div class="content">
           <div class="title">Preview</div>
           <div class="description">Submit contract</div>
@@ -48,13 +48,13 @@
       <np-client-info [project]="project" (previousClicked)="previous()" (nextClicked)="next()"></np-client-info>
     </div>
     <div *ngSwitchCase="2">
-
+      <np-project [project]="project" (previousClicked)="previous()" (nextClicked)="next()"></np-project>
     </div>
     <div *ngSwitchCase="3">
-
+      <np-questionnaire [project]="project" (previousClicked)="previous()" (nextClicked)="next()"></np-questionnaire>
     </div>
     <div *ngSwitchCase="4">
-
+      <np-preview [project]="project" (previousClicked)="previous()" (nextClicked)="next()"></np-preview>
     </div>
   </div>
 

@@ -27,12 +27,26 @@ export class CompanyInfoService {
     this.actionUrl = `${_configuration.kvkApiHost}${_configuration.kvkApiPrefix}companies`;
   }
 
-  public getCompanyByKvkNumber(kvkNumber): Observable<KvKCompany> {
-    return this._http
-      .get(this.actionUrl + '/by-kvknumber/' + kvkNumber + '?' + encodeQueryData({
-          'api_key': this._configuration.kvkApiKey
-      })).map(res => res.json());
+  public getCompanyByKvkNumber(kvkNumber: string): Observable<KvKCompany> {
+    return this._http.get(this.actionUrl + '/by-kvknumber/' + kvkNumber + '?' + encodeQueryData({
+        'api_key': this._configuration.kvkApiKey
+    })).map(res => res.json());
   }
+
+  public findByName(name: string): Observable<KvKCompany[]> {
+    return this._http.get(this.actionUrl + '?' + encodeQueryData({
+        'api_key': this._configuration.kvkApiKey,
+        'tradename': name
+    })).map(res => res.json());
+  }
+
+  public findByKvKNumber(kvkNumber: string): Observable<KvKCompany[]> {
+    return this._http.get(this.actionUrl + '?' + encodeQueryData({
+        'api_key': this._configuration.kvkApiKey,
+        'kvknummer': kvkNumber
+    })).map(res => res.json());
+  }
+
 
   public getCompanyOfCurrentUser(): Observable<KvKCompany> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
