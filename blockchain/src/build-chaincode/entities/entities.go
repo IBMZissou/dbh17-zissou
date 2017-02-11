@@ -24,6 +24,7 @@ type Company struct {
 	TestDataElement 	`json:"-"`
 	CompanyID   	string 	`json:"companyID"`
 	Name	 	string 	`json:"name"`
+	CompanyType	string	`json:"companyType"`
 }
 
 type Thing struct {

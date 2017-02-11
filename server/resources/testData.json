@@ -42,11 +42,23 @@
   "companies": [
     {
       "companyID": "14078586",
-      "name": "Wouter Haasnoot"
+      "name": "Wouter Haasnoot",
+      "companyType": "company"
     },
     {
       "companyID": "14073685",
-      "name": "WindVision B.V."
+      "name": "WindVision B.V.",
+      "companyType": "company"
+    },
+    {
+      "companyID": "123KVK",
+      "name": "Kamer van Koophandel",
+      "companyType": "chamberOfCommerce"
+    },
+    {
+      "companyID": "12Belasting",
+      "name": "Belastingdienst",
+      "companyType": "tax"
     }
   ]
 }
