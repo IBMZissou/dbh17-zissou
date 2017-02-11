@@ -146,6 +146,7 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 
 	if project.Signatures.FreelancerSignature.Hash == project.Signatures.ClientSignature.Hash {
 		project.Signatures.SignedByBothParties = true;
+		project.Status = "Signed"
 	}
 
 	return nil
