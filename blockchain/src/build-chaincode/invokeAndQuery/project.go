@@ -30,6 +30,13 @@ func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error
 		return errors.New("Current user doesn't belong to either the client or freelancer company")
 	}
 
+	user, err := util.GetCurrentBlockchainUser(stub)
+	if err != nil {
+		return errors.New("Error while getting user, reason" + err.Error())
+	}
+
+	project.CreatorID = user.UserID
+
 	//marshall the trade so it can be stored in the chain.
 	projectAsBytes, err := json.Marshal(project)
 	if err != nil {
