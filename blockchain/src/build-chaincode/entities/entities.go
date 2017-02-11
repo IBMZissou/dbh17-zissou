@@ -33,6 +33,17 @@ type Thing struct {
 	UserID    	string 	`json:"userID"`
 }
 
+type Project struct {
+	ProjectID	string	`json:"projectID"`
+	Freelancer	string	`json:"freelancer"`
+	Client		string	`json:"client"`
+	StartDate	int	`json:"startDate"`
+	Deadline	int	`json:"deadline"`
+	Budget		float64	`json:"budget"`
+	PaymentType	string	`json:"paymentType"`
+	Deliverables	string	`json:"deliverables"`
+}
+
 type UserAuthenticationResult struct {
 	User        	User
 	Authenticated 	bool

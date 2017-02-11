@@ -22,7 +22,7 @@
     "test-e2e": "docker-compose exec server bash -c 'npm run e2e'",
     "test": "npm -s run test-server && npm -s run test-go",
     "cf": "docker build --tag cf . && docker run -it --rm -v $(pwd)/server/resources:/usr/src/app/server/resources cf"
-  },
+},
   "repository": {
     "type": "git",
     "url": "git+ssh://git@github.com/IBM-Blockchain/fabric-boilerplate.git"
