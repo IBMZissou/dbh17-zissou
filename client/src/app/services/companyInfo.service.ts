@@ -17,7 +17,7 @@ let encodeQueryData = (data: any): string => {
 @Injectable()
 export class CompanyInfoService {
   private actionUrl: string;
-  private COMPANY_KEY: string = 'userCompany'
+  private COMPANY_KEY: string = 'userCompany';
 
   constructor(private _http: Http,
               private _configuration: Configuration){
@@ -35,7 +35,7 @@ export class CompanyInfoService {
     let currentUser = JSON.parse(localStorage.getItem("currentUser")).user;
     this.getCompanyByKvkNumber(currentUser.companyID).subscribe(result => {
       if (result.returned === 1){
-        console.log("saved company info")
+        console.log("retrieved company info");
         let userCompany = result.companies[0];
         console.log(userCompany);
         localStorage.setItem(this.COMPANY_KEY, JSON.stringify({userCompany}));
