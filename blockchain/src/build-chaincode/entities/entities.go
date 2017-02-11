@@ -16,10 +16,11 @@ type TestDataElement interface {
 type User struct {
 	TestDataElement 	`json:"-"`
 	UserID   	string 	`json:"userID"`
-	Username 	string 	`json:"username"`
-	Password 	string 	`json:"password"`
+	FirstName 	string 	`json:"firstName"`
+	LastName 	string 	`json:"lastName"`
 	Salt     	string 	`json:"salt"`
 	Hash     	string 	`json:"hash"`
+	CompanyID	string	`json:"companyID"`
 }
 
 type Thing struct {
@@ -39,7 +40,7 @@ type Users struct {
 }
 
 func (t *User) ID() string {
-	return t.Username
+	return t.UserID
 }
 
 func (t *Thing) ID() string {

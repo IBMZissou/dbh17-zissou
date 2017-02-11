@@ -2,8 +2,10 @@
   "users": [
     {
       "userID": "john",
-      "username": "john",
+      "firstName": "John",
+      "lastName": "Johnson",
       "password": "passw0rd",
+      "companyID": "8765456",
       "attributes": [
         {
           "name": "userID",
