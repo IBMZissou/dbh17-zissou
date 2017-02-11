@@ -6,6 +6,7 @@ import (
 	"encoding/json"
 	"errors"
 	"build-chaincode/util"
+	"fmt"
 )
 
 func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error {
@@ -19,6 +20,8 @@ func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error
 	if project.ProjectID == "" {
 		return errors.New("ProjectID is empty")
 	}
+
+	// TODO add validation for all the other fields
 
 	// check if current user belongs to either the freelancer or the client
 	userCompany, err := util.GetCompanyByCertificate(stub)
@@ -103,4 +106,12 @@ func GetProjectByID(stub shim.ChaincodeStubInterface, projectID string) (entitie
 	}
 
 	return entities.Project{}, nil
+}
+
+func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp int64) error {
+	fmt.Println(stub)
+	fmt.Println(projectID)
+	fmt.Println(timestamp)
+
+	return nil
 }

@@ -55,21 +55,11 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		return nil, nil
 	} else if functionName == "createProject" {
 		return nil, invokeAndQuery.CreateProject(stub, args[0])
-	} else if functionName == "addModelDesignContract" {
+	} else if functionName == "signAgreement" {
 		projectID := args[0]
-		modelDesignAgreementAsJSON := args[1]
+		timeStamp := util.StringToDate(args[1])
 
-		var thing entities.Thing
-		if err := json.Unmarshal([]byte(thingAsJSON), &thing); err != nil {
-			return nil, errors.New("Error while unmarshalling thing, reason: " + err.Error())
-		}
-
-		thingAsBytes, err := json.Marshal(thing);
-		if err != nil {
-			return nil, errors.New("Error marshalling thing, reason: " + err.Error())
-		}
-
-		util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
+		invokeAndQuery.SignAgreement(stub, projectID, timeStamp)
 
 		return nil, nil
 	}

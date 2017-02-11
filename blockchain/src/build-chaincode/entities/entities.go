@@ -35,10 +35,11 @@ type Thing struct {
 
 type Project struct {
 	ProjectID	string	`json:"projectID"`
+	ProjectName	string	`json:"projectName"`
 	Freelancer	string	`json:"freelancer"`
 	Client		string	`json:"client"`
-	StartDate	int	`json:"startDate"`
-	EndDate		int	`json:"deadline"`
+	StartDate	int64	`json:"startDate"`
+	EndDate		int64	`json:"endDate"`
 	Budget		float64	`json:"budget"`
 	PaymentType	string	`json:"paymentType"`
 	Description	string	`json:"description"`
@@ -47,6 +48,9 @@ type Project struct {
 	Location	string	`json:"location"`
 	HoursPerWeek	int	`json:"hoursPerWeek"`
 	CreatorID	string	`json:"creatorID"`
+	Status		string	`json:"status"`
+	LastUpdated	int64	`json:"lastUpdated"`
+	Agreement	Agreement
 }
 
 type UserAuthenticationResult struct {
