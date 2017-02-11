@@ -10,7 +10,7 @@ import (
 	"build-chaincode/entities"
 )
 
-var logger = shim.NewLogger("fabric-boilerplate")
+var logger = shim.NewLogger("zissou")
 //======================================================================================================================
 //	 Structure Definitions
 //======================================================================================================================
@@ -94,6 +94,13 @@ func (t *Chaincode) GetQueryResult(stub shim.ChaincodeStubInterface, functionNam
 		}
 
 		return thingsByUserID, nil
+	}  else if functionName == "getCompanyByCertificate" {
+		company, err := util.GetCompanyByCertificate(stub)
+		if err != nil {
+			return nil, errors.New("could not retrieve company, reason: " + err.Error())
+		}
+
+		return company, nil
 	}
 
 	return nil, errors.New("Received unknown query function name")
@@ -156,6 +163,18 @@ func (t *Chaincode) addTestdata(stub shim.ChaincodeStubInterface, testDataAsJson
 		}
 
 		err = util.StoreObjectInChain(stub, user.UserID, util.UsersIndexName, userAsBytes)
+		if err != nil {
+			return errors.New("error in storing object, reason: " + err.Error())
+		}
+	}
+
+	for _, company := range testData.Companies {
+		companyAsBytes, err := json.Marshal(company);
+		if err != nil {
+			return errors.New("Error marshalling companyThing, reason: " + err.Error())
+		}
+
+		err = util.StoreObjectInChain(stub, company.CompanyID, util.ThingsIndexName, companyAsBytes)
 		if err != nil {
 			return errors.New("error in storing object, reason: " + err.Error())
 		}
