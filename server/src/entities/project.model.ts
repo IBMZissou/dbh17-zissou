@@ -12,7 +12,11 @@ export class Project {
                        private _endDate: number,
                        private _budget: number,
                        private _paymentType: string,
-                       private _deliverables: string) {
+                       private _description: string,
+                       private _deliverables: string,
+                       private _jobRequirements: string[],
+                       private _location: string,
+                       private _hoursPerWeek: number) {
         this._projectID = shortID.generate();
     }
 
@@ -52,6 +56,22 @@ export class Project {
         return this._creatorID;
     }
 
+    public get description(): string {
+        return this._description;
+    }
+
+    public get jobRequirements(): string[] {
+        return this._jobRequirements;
+    }
+
+    public get location(): string {
+        return this._location;
+    }
+
+    public get hoursPerWeek(): number {
+        return this._hoursPerWeek;
+    }
+
     public toJSON(): any {
         return {
             'projectID': this.projectID,
@@ -61,7 +81,11 @@ export class Project {
             'endDate': this.endDate,
             'budget': this.budget,
             'paymentType': this.paymentType,
+            'description': this.description,
             'deliverables': this.deliverables,
+            'jobRequirements': this.jobRequirements,
+            'location': this.location,
+            'hoursPerWeek': this.hoursPerWeek,
             'creatorID': this.creatorID
         };
     }
