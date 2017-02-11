@@ -10,6 +10,13 @@ import { UserAuthenticatorMiddleware } from '../../middleware/UserAuthenticatorM
 export class ProjectsController {
     private blockchainClient: BlockchainClient = Container.get(BlockchainClient);
 
+    @Get('/projects')
+    public getProjectsForUser(@Req() request: any): any {
+        let enrollmentID = new JSONWebToken(request).getUserID();
+
+        return this.blockchainClient.query('getProjects', [], enrollmentID);
+    }
+
     @Post('/projects')
     public create(@Body() project: Project, @Req() request: any): any {
         let enrollmentID = new JSONWebToken(request).getUserID();
