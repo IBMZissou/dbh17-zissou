@@ -19,15 +19,17 @@ export class ProjectsController {
 
     @Post('/projects')
     public create(@Body() project: Project, @Req() request: any): any {
-      let enrollmentID = new JSONWebToken(request).getUserID();
+        let enrollmentID = new JSONWebToken(request).getUserID();
 
         let newProject = new Project(
+            request.body.projectName,
             request.body.freelancer,
             request.body.client,
             request.body.startDate,
             request.body.endDate,
             request.body.budget,
             request.body.paymentType,
+            request.body.paymentTrigger,
             request.body.description,
             request.body.deliverables,
             request.body.jobRequirements,
@@ -35,7 +37,7 @@ export class ProjectsController {
             request.body.hoursPerWeek
         );
 
-        return this.blockchainClient.invoke('createProject', [JSON.stringify(newProject)], enrollmentID);
+        return this.blockchainClient.invoke('createProject', [JSON.stringify(newProject), newProject.projectID, new Date().getTime().toString()], enrollmentID);
     }
 
     @Get('/project/:id')

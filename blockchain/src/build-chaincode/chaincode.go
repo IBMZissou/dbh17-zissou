@@ -54,7 +54,28 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 
 		return nil, nil
 	} else if functionName == "createProject" {
-		return nil, invokeAndQuery.CreateProject(stub, args[0])
+		err := invokeAndQuery.CreateProject(stub, args[0])
+		if err != nil {
+			return nil, err
+		}
+
+		timeStamp := util.StringToDate(args[2])
+		err = invokeAndQuery.SignAgreement(stub, args[1], timeStamp)
+		if err != nil {
+			return nil, err
+		}
+
+		return nil, nil
+	} else if functionName == "signAgreement" {
+		projectID := args[0]
+		timeStamp := util.StringToDate(args[1])
+
+		err := invokeAndQuery.SignAgreement(stub, projectID, timeStamp)
+		if err != nil {
+			return nil, err
+		}
+
+		return nil, nil
 	}
 
 	return nil, errors.New("Received unknown invoke function name")
@@ -97,21 +118,21 @@ func (t *Chaincode) GetQueryResult(stub shim.ChaincodeStubInterface, functionNam
 		}
 
 		return thingsByUserID, nil
-	}  else if functionName == "getCompanyByCertificate" {
+	} else if functionName == "getCompanyByCertificate" {
 		company, err := util.GetCompanyByCertificate(stub)
 		if err != nil {
 			return nil, errors.New("could not retrieve company, reason: " + err.Error())
 		}
 
 		return company, nil
-	}  else if functionName == "getProjects" {
+	} else if functionName == "getProjects" {
 		projects, err := invokeAndQuery.GetProjects(stub)
 		if err != nil {
 			return nil, errors.New("could not retrieve company, reason: " + err.Error())
 		}
 
 		return projects, nil
-	}  else if functionName == "getProjectByID" {
+	} else if functionName == "getProjectByID" {
 		project, err := invokeAndQuery.GetProjectByID(stub, args[0])
 		if err != nil {
 			return nil, errors.New("could not retrieve project, reason: " + err.Error())
@@ -119,9 +140,6 @@ func (t *Chaincode) GetQueryResult(stub shim.ChaincodeStubInterface, functionNam
 
 		return project, nil
 	}
-
-
-
 
 	return nil, errors.New("Received unknown query function name")
 }

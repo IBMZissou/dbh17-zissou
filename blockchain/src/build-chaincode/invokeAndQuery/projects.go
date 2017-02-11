@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"errors"
 	"build-chaincode/util"
+	"crypto/sha256"
+	"encoding/hex"
 )
 
 func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error {
@@ -19,6 +21,8 @@ func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error
 	if project.ProjectID == "" {
 		return errors.New("ProjectID is empty")
 	}
+
+	// TODO add validation for all the other fields
 
 	// check if current user belongs to either the freelancer or the client
 	userCompany, err := util.GetCompanyByCertificate(stub)
@@ -103,4 +107,93 @@ func GetProjectByID(stub shim.ChaincodeStubInterface, projectID string) (entitie
 	}
 
 	return entities.Project{}, nil
+}
+
+func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp int64) error {
+	project, err := GetProjectByID(stub, projectID)
+	if err != nil {
+		return errors.New("Error while getting project, reason: " + err.Error())
+	}
+
+	user, err := util.GetCurrentBlockchainUser(stub)
+	if err != nil {
+		return errors.New("Unable to retrieve user, reason: " + err.Error())
+	}
+
+	userCompany, err := util.GetCompanyByCertificate(stub)
+	if err != nil {
+		return errors.New("Error while getting user company, reason: " + err.Error())
+	}
+
+	if userCompany.CompanyID != project.Freelancer && userCompany.CompanyID != project.Client {
+		return errors.New("Current user doesn't belong to either the client or freelancer company")
+	}
+
+	userRole, err := GetUserRole(userCompany.CompanyID, project)
+	if err != nil {
+		return err
+	}
+
+	projectHash := createProjectHash(project)
+
+	signature := entities.Signature{Timestamp: timestamp, Hash: projectHash, UserID: user.UserID}
+
+	if userRole == "freelancer" {
+		project.Signatures.FreelancerSignature = signature;
+	} else if userRole == "client" {
+		project.Signatures.ClientSignature = signature;
+	}
+
+	if project.Signatures.FreelancerSignature.Hash == project.Signatures.ClientSignature.Hash {
+		project.Signatures.SignedByBothParties = true;
+		project.Status = "Signed"
+	}
+
+	project.LastUpdated = timestamp
+
+	projectAsBytes, err := json.Marshal(project)
+	if err != nil {
+		return errors.New("Error in marshalling project" + err.Error())
+	}
+
+	err = stub.PutState(projectID, projectAsBytes)
+	if err != nil {
+		return errors.New("Could not store project" + err.Error())
+	}
+
+	return nil
+}
+
+func GetUserRole(companyID string, project entities.Project) (string, error) {
+	if companyID == project.Freelancer {
+		return "freelancer", nil
+	} else if companyID == project.Client {
+		return "client", nil
+	} else {
+		return "", errors.New("Can't find the role")
+	}
+}
+
+type SubsetOfProject struct {
+	ProjectName  string
+	Freelancer   string
+	Client       string
+	StartDate    int64
+	EndDate      int64
+	HoursPerWeek int
+}
+
+func createProjectHash(project entities.Project) (string) {
+	return calculate_hash([]string{project.ProjectName, project.Freelancer, project.Client, string(project.StartDate),
+		string(project.EndDate), string(project.HoursPerWeek)})
+}
+
+func calculate_hash(args []string) string {
+	var str = ""
+	for _, v := range args {
+		str += v
+	}
+	hasher := sha256.New()
+	hasher.Write([]byte(str))
+	return hex.EncodeToString(hasher.Sum(nil))
 }
