@@ -1,0 +1,10 @@
+exclude:
+- /client/karma.conf.js
+- /client/protractor.conf.js
+- /client/gruntfile.js
+compoent_depth: 1
+languages:
+- go
+- javascript
+- typescript
+- script
