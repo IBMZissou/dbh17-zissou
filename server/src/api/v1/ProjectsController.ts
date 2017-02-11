@@ -22,6 +22,7 @@ export class ProjectsController {
       let enrollmentID = new JSONWebToken(request).getUserID();
 
         let newProject = new Project(
+            request.body.projectName,
             request.body.freelancer,
             request.body.client,
             request.body.startDate,
