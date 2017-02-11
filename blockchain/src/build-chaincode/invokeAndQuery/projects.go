@@ -176,18 +176,21 @@ func GetUserRole(companyID string, project entities.Project) (string, error) {
 	}
 }
 
-type SubsetOfProject struct {
-	ProjectName  string
-	Freelancer   string
-	Client       string
-	StartDate    int64
-	EndDate      int64
-	HoursPerWeek int
-}
-
 func createProjectHash(project entities.Project) (string) {
-	return calculate_hash([]string{project.ProjectName, project.Freelancer, project.Client, string(project.StartDate),
-		string(project.EndDate), string(project.HoursPerWeek)})
+	return calculate_hash([]string{
+		project.ProjectID,
+		project.ProjectName,
+		project.Freelancer,
+		project.Client,
+		string(project.StartDate),
+		string(project.EndDate),
+		string(project.HoursPerWeek),
+		project.PaymentType,
+		project.PaymentTrigger,
+		project.Description,
+		project.Deliverables,
+		project.Location,
+		project.CreatorID})
 }
 
 func calculate_hash(args []string) string {
