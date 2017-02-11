@@ -17,6 +17,7 @@ export class Project {
                        private _endDate: number,
                        private _budget: number,
                        private _paymentType: string,
+                       private _paymentTrigger: string,
                        private _description: string,
                        private _deliverables: string,
                        private _jobRequirements: string[],
@@ -54,6 +55,10 @@ export class Project {
 
     public get paymentType(): string {
         return this._paymentType;
+    }
+
+    public get paymentTrigger(): string {
+        return this._paymentTrigger;
     }
 
     public get deliverables(): string {
@@ -106,6 +111,7 @@ export class Project {
             'endDate': this.endDate,
             'budget': this.budget,
             'paymentType': this.paymentType,
+            'paymentTrigger': this.paymentTrigger,
             'description': this.description,
             'deliverables': this.deliverables,
             'jobRequirements': this.jobRequirements,
