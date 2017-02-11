@@ -19,7 +19,7 @@ export class ProjectsController {
 
     @Post('/projects')
     public create(@Body() project: Project, @Req() request: any): any {
-      let enrollmentID = new JSONWebToken(request).getUserID();
+        let enrollmentID = new JSONWebToken(request).getUserID();
 
         let newProject = new Project(
             request.body.projectName,
@@ -36,7 +36,10 @@ export class ProjectsController {
             request.body.hoursPerWeek
         );
 
-        return this.blockchainClient.invoke('createProject', [JSON.stringify(newProject)], enrollmentID);
+        this.blockchainClient.invoke('createProject', [JSON.stringify(newProject)], enrollmentID);
+        this.blockchainClient.invoke('signAgreement', [newProject.projectID, new Date().getTime().toString()], enrollmentID);
+
+        return {'message': 'Succesfully created a project'};
     }
 
     @Get('/project/:id')

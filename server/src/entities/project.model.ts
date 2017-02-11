@@ -1,14 +1,14 @@
 'use strict';
 
 import * as shortID from 'shortid';
-import { Agreement } from './Agreement';
+import { Signatures } from './Signatures';
 
 export class Project {
     private _projectID: string;
     private _creatorID: string;
     private _lastUpdated: number;
     private _status: string;
-    private _agreement: Agreement;
+    private _signatures: Signatures;
 
     public constructor(private _projectName: string,
                        private _freelancer: string,
@@ -25,7 +25,7 @@ export class Project {
         this._projectID = shortID.generate();
         this._lastUpdated = new Date().getTime();
         this._status = 'Unsigned';
-        this._agreement = new Agreement();
+        this._signatures = new Signatures();
     }
 
     public get projectID(): string {
@@ -92,8 +92,8 @@ export class Project {
         return this._projectName;
     }
 
-    public get agreement(): Agreement {
-        return this._agreement;
+    public get signatures(): Signatures {
+        return this._signatures;
     }
 
     public toJSON(): any {
@@ -114,7 +114,7 @@ export class Project {
             'creatorID': this.creatorID,
             'status': this.status,
             'lastUpdated': this.lastUpdated,
-            'agreement': this.agreement
+            'signatures': this.signatures
         };
     }
 }

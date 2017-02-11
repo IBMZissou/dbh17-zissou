@@ -22,6 +22,6 @@ export class Signature {
             'timestamp': this.timestamp,
             'hash': this.hash,
             'userID': this.userID
-        }
+        };
     }
 }
