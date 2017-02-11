@@ -18,7 +18,7 @@ let encodeQueryData = (data: any): string => {
 export class CompanyInfoService {
   private actionUrl: string;
 
-  constructor(
+  public constructor(
     private _http: Http,
     private _configuration: Configuration
   ) {
