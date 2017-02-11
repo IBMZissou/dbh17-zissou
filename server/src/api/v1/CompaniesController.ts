@@ -1,7 +1,6 @@
 import {Container} from 'typedi';
-import {Get, Post, JsonController, Param, Body, Req, UseBefore} from 'routing-controllers';
+import {Get, JsonController, Req, UseBefore} from 'routing-controllers';
 import {JSONWebToken} from '../../utils/JSONWebToken';
-// import {Company} from '../../entities/company.model';
 import {UserAuthenticatorMiddleware} from '../../middleware/UserAuthenticatorMiddleware';
 import {BlockchainClient} from '../../blockchain/client/blockchainClient';
 
