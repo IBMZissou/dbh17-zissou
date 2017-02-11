@@ -6,6 +6,8 @@ import (
 	"encoding/json"
 	"errors"
 	"build-chaincode/util"
+	"crypto/sha256"
+	"encoding/hex"
 )
 
 func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error {
@@ -132,9 +134,9 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 		return err
 	}
 
-	//projectHash := createProjectHash(project)
+	projectHash := createProjectHash(project)
 
-	signature := entities.Signature{timestamp, "", user.UserID}
+	signature := entities.Signature{timestamp, projectHash, user.UserID}
 
 	if userRole == "freelancer" {
 		project.Signatures.FreelancerSignature = signature;
@@ -149,7 +151,7 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 	return nil
 }
 
-func GetUserRole (companyID string, project entities.Project) (string, error) {
+func GetUserRole(companyID string, project entities.Project) (string, error) {
 	if companyID == project.Freelancer {
 		return "freelancer", nil
 	} else if companyID == project.Client {
@@ -159,8 +161,26 @@ func GetUserRole (companyID string, project entities.Project) (string, error) {
 	}
 }
 
-//func createProjectHash (project entities.Project) string {
-//	// TODO only include certain fields inside the hash, otherwise the hashes will never match
-//	data := []byte(project)
-//	return md5.Sum(data)
-//}
+type SubsetOfProject struct {
+	ProjectName  string
+	Freelancer   string
+	Client       string
+	StartDate    int64
+	EndDate      int64
+	HoursPerWeek int
+}
+
+func createProjectHash(project entities.Project) (string) {
+	return calculate_hash([]string{project.ProjectName, project.Freelancer, project.Client, string(project.StartDate),
+		string(project.EndDate), string(project.HoursPerWeek)})
+}
+
+func calculate_hash(args []string) string {
+	var str = ""
+	for _, v := range args {
+		str += v
+	}
+	hasher := sha256.New()
+	hasher.Write([]byte(str))
+	return hex.EncodeToString(hasher.Sum(nil))
+}

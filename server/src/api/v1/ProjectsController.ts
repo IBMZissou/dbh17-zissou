@@ -36,10 +36,7 @@ export class ProjectsController {
             request.body.hoursPerWeek
         );
 
-        this.blockchainClient.invoke('createProject', [JSON.stringify(newProject)], enrollmentID);
-        this.blockchainClient.invoke('signAgreement', [newProject.projectID, new Date().getTime().toString()], enrollmentID);
-
-        return {'message': 'Succesfully created a project'};
+        return this.blockchainClient.invoke('createProject', [JSON.stringify(newProject), newProject.projectID, new Date().getTime().toString()], enrollmentID);
     }
 
     @Get('/project/:id')
