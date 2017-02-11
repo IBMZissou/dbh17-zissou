@@ -35,14 +35,35 @@ type Thing struct {
 
 type Project struct {
 	ProjectID	string	`json:"projectID"`
+	ProjectName	string	`json:"projectName"`
 	Freelancer	string	`json:"freelancer"`
 	Client		string	`json:"client"`
-	StartDate	int	`json:"startDate"`
-	EndDate		int	`json:"deadline"`
+	StartDate	int64	`json:"startDate"`
+	EndDate		int64	`json:"endDate"`
 	Budget		float64	`json:"budget"`
 	PaymentType	string	`json:"paymentType"`
+	PaymentTrigger	string	`json:"paymentTrigger"`
+	Description	string	`json:"description"`
 	Deliverables	string	`json:"deliverables"`
+	JobRequirements	[]string `json:"jobRequirements"`
+	Location	string	`json:"location"`
+	HoursPerWeek	int	`json:"hoursPerWeek"`
 	CreatorID	string	`json:"creatorID"`
+	Status		string	`json:"status"`
+	LastUpdated	int64	`json:"lastUpdated"`
+	Signatures	Signatures
+}
+
+type Signatures struct {
+	SignedByBothParties bool
+	FreelancerSignature Signature
+	ClientSignature     Signature
+}
+
+type Signature struct {
+	Timestamp int64
+	Hash      string
+	UserID    string
 }
 
 type UserAuthenticationResult struct {
