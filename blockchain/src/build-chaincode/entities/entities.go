@@ -38,10 +38,11 @@ type Project struct {
 	Freelancer	string	`json:"freelancer"`
 	Client		string	`json:"client"`
 	StartDate	int	`json:"startDate"`
-	Deadline	int	`json:"deadline"`
+	EndDate		int	`json:"deadline"`
 	Budget		float64	`json:"budget"`
 	PaymentType	string	`json:"paymentType"`
 	Deliverables	string	`json:"deliverables"`
+	CreatorID	string	`json:"creatorID"`
 }
 
 type UserAuthenticationResult struct {
