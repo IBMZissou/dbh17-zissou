@@ -20,6 +20,10 @@ import { NewProjectClientInfoComponent } from './components/dashboard/new-projec
 import { NewProjectProjectComponent } from './components/dashboard/new-project/project/project.component';
 import { NewProjectQuestionnaireComponent } from './components/dashboard/new-project/questionnaire/questionnaire.component';
 import { NewProjectPreviewComponent } from './components/dashboard/new-project/preview/preview.component';
+import {
+  AccordionTitleCompatComponent,
+  AccordionContentCompatComponent
+} from './components/accordion.compat.component';
 
 @NgModule({
   declarations: [
@@ -33,7 +37,10 @@ import { NewProjectPreviewComponent } from './components/dashboard/new-project/p
     NewProjectClientInfoComponent,
     NewProjectProjectComponent,
     NewProjectQuestionnaireComponent,
-    NewProjectPreviewComponent
+    NewProjectPreviewComponent,
+
+    AccordionTitleCompatComponent,
+    AccordionContentCompatComponent,
   ],
   imports: [
     BrowserModule,

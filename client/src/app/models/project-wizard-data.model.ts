@@ -1,6 +1,6 @@
 export class ProjectFreelancer {
   public companyName: string;
-  public kvkNumber: number;
+  public kvkNumber: string;
   public address: string;
   public zipcode: string;
   public firstName: string;
@@ -9,7 +9,7 @@ export class ProjectFreelancer {
 
 export class ProjectClient {
   public companyName: string;
-  public kvkNumber: number;
+  public kvkNumber: string;
   public address: string;
   public zipcode: string;
 }
