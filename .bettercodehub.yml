@@ -1,7 +1,7 @@
 exclude:
 - /client/karma.conf.js
 - /client/protractor.conf.js
-- /client/gruntfile.js
+- /server/gruntfile.js
 component_depth: 1
 languages:
 - go
