@@ -1,12 +1,9 @@
 package entities
 
-type ECertResponse struct {
-	OK string `json:"OK"`
-}
-
 type TestData struct {
-	Users  		[]User 	 `json:"users"`
-	Things 		[]Thing  `json:"things"`
+	Users     []User     	`json:"users"`
+	Things    []Thing  	`json:"things"`
+	Companies []Company  	`json:"companies"`
 }
 
 type TestDataElement interface {
@@ -21,6 +18,12 @@ type User struct {
 	Salt     	string 	`json:"salt"`
 	Hash     	string 	`json:"hash"`
 	CompanyID	string	`json:"companyID"`
+}
+
+type Company struct {
+	TestDataElement 	`json:"-"`
+	CompanyID   	string 	`json:"companyID"`
+	Name	 	string 	`json:"name"`
 }
 
 type Thing struct {

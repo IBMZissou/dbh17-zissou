@@ -43,6 +43,26 @@ func GetThingsByUserID(stub shim.ChaincodeStubInterface, userID string) ([]strin
 	return thingIDs, nil
 }
 
+func GetCompanyByCertificate(stub shim.ChaincodeStubInterface) (entities.Company, error) {
+	user, err := GetCurrentBlockchainUser(stub)
+	if err != nil {
+		return entities.Company{}, errors.New("Unable to retrieve user, reason: " + err.Error())
+	}
+
+	companyAsBytes, err := stub.GetState(user.CompanyID)
+	if err != nil {
+		return entities.Company{}, errors.New("Could not retrieve company for ID " + user.CompanyID + " reason: " + err.Error())
+	}
+
+	var company entities.Company
+	err = json.Unmarshal(companyAsBytes, &company)
+	if err != nil {
+		return entities.Company{}, errors.New("Error while unmarshalling companyAsBytes, reason: " + err.Error())
+	}
+
+	return company, nil
+}
+
 func GetUser(stub shim.ChaincodeStubInterface, username string) (entities.User, error) {
 	userAsBytes, err := stub.GetState(username)
 	if err != nil {
