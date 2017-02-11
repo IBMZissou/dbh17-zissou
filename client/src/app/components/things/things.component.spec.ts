@@ -1,20 +1,34 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ThingsComponent } from './things.component';
+import { Observable } from 'rxjs';
+import { ThingService } from '../../services/thing.service';
+import { CompanyInfoService } from '../../services/companyInfo.service';
+
+class MockThingService {
+  public getThingsByUser(): Observable<any[]> {
+    return Observable.of([]);
+  }
+}
+
+class MockCompanyInfoService {
+  public getCompanyByKvkNumber(): Observable<any> {
+    return Observable.of({});
+  }
+}
 
 describe('ThingsComponent', () => {
   let component: ThingsComponent;
   let fixture: ComponentFixture<ThingsComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ ThingsComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [ ThingsComponent ],
+      providers: [
+        { provide: ThingService, useClass: MockThingService },
+        { provide: CompanyInfoService, useClass: MockCompanyInfoService }
+      ]
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(ThingsComponent);
