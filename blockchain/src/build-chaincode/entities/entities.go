@@ -2,7 +2,6 @@ package entities
 
 type TestData struct {
 	Users     []User     	`json:"users"`
-	Things    []Thing  	`json:"things"`
 	Companies []Company  	`json:"companies"`
 }
 
@@ -25,13 +24,6 @@ type Company struct {
 	CompanyID   	string 	`json:"companyID"`
 	Name	 	string 	`json:"name"`
 	CompanyType	string	`json:"companyType"`
-}
-
-type Thing struct {
-	TestDataElement    	`json:"-"`
-	ThingID      	string 	`json:"thingID"`
-	SomeProperty 	string 	`json:"someProperty"`
-	UserID    	string 	`json:"userID"`
 }
 
 type Project struct {
@@ -78,8 +70,4 @@ type Users struct {
 
 func (t *User) ID() string {
 	return t.UserID
-}
-
-func (t *Thing) ID() string {
-	return t.ThingID
 }

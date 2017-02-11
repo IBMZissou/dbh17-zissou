@@ -37,22 +37,6 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		return nil, t.addUser(stub, args[0], args[1])
 	} else if functionName == "addTestdata" {
 		return nil, t.addTestdata(stub, args[0])
-	} else if functionName == "createThing" {
-		thingAsJSON := args[0]
-
-		var thing entities.Thing
-		if err := json.Unmarshal([]byte(thingAsJSON), &thing); err != nil {
-			return nil, errors.New("Error while unmarshalling thing, reason: " + err.Error())
-		}
-
-		thingAsBytes, err := json.Marshal(thing);
-		if err != nil {
-			return nil, errors.New("Error marshalling thing, reason: " + err.Error())
-		}
-
-		util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
-
-		return nil, nil
 	} else if functionName == "createProject" {
 		err := invokeAndQuery.CreateProject(stub, args[0])
 		if err != nil {
@@ -111,13 +95,6 @@ func (t *Chaincode) GetQueryResult(stub shim.ChaincodeStubInterface, functionNam
 		}
 
 		return t.authenticateAsUser(stub, user, args[1]), nil
-	} else if functionName == "getThingsByUserID" {
-		thingsByUserID, err := util.GetThingsByUserID(stub, args[0])
-		if err != nil {
-			return nil, errors.New("could not retrieve things by user id: " + args[0] + ", reason: " + err.Error())
-		}
-
-		return thingsByUserID, nil
 	} else if functionName == "getCompanyByCertificate" {
 		company, err := util.GetCompanyByCertificate(stub)
 		if err != nil {
@@ -212,19 +189,7 @@ func (t *Chaincode) addTestdata(stub shim.ChaincodeStubInterface, testDataAsJson
 			return errors.New("Error marshalling companyThing, reason: " + err.Error())
 		}
 
-		err = util.StoreObjectInChain(stub, company.CompanyID, util.ThingsIndexName, companyAsBytes)
-		if err != nil {
-			return errors.New("error in storing object, reason: " + err.Error())
-		}
-	}
-
-	for _, thing := range testData.Things {
-		thingAsBytes, err := json.Marshal(thing);
-		if err != nil {
-			return errors.New("Error marshalling testThing, reason: " + err.Error())
-		}
-
-		err = util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
+		err = util.StoreObjectInChain(stub, company.CompanyID, util.CompaniesIndexName, companyAsBytes)
 		if err != nil {
 			return errors.New("error in storing object, reason: " + err.Error())
 		}
@@ -259,4 +224,3 @@ func (t *Chaincode) authenticateAsUser(stub shim.ChaincodeStubInterface, user en
 		Authenticated: true,
 	}
 }
-

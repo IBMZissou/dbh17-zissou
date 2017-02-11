@@ -15,10 +15,10 @@ export class ThingsComponent implements OnInit {
   ) {}
 
   public ngOnInit(): void {
-    this._thingsService.getThingsByUser().subscribe(things => {
-      console.log(things);
-      this.things = things;
-    });
+    // this._thingsService.getThingsByUser().subscribe(things => {
+    //   console.log(things);
+    //   this.things = things;
+    // });
 
     this._companyInfoService.getCompanyOfCurrentUser();
   }

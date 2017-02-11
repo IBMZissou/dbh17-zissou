@@ -32,7 +32,6 @@
         "src/api/v1/AuthController.ts",
         "src/api/v1/CompaniesController.ts",
         "src/api/v1/ProjectsController.ts",
-        "src/api/v1/ThingsController.ts",
         "src/blockchain/Blockchain.ts",
         "src/blockchain/BlockchainBluemix.ts",
         "src/blockchain/BlockchainFactory.ts",
