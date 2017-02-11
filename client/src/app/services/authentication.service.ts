@@ -1,25 +1,27 @@
-import {Injectable} from '@angular/core';
-import {Http, Response, Headers} from '@angular/http';
-import {Observable} from 'rxjs';
-import {Configuration} from '../app.constants';
+import { Injectable } from '@angular/core';
+import { Http, Response, Headers } from '@angular/http';
+import { Observable } from 'rxjs';
+import { Configuration } from '../app.constants';
 import 'rxjs/add/operator/map';
 
 @Injectable()
 export class AuthenticationService {
   public actionUrl: string;
   public token: string;
-  private TOKEN_KEY: string = 'token';
-  private USER_KEY: string = 'currentUser';
+  private TOKEN_KEY = 'token';
+  private USER_KEY = 'currentUser';
   public user: any;
 
-  public constructor(private _http: Http,
-                     private _configuration: Configuration) {
+  public constructor(
+    private _http: Http,
+    private _configuration: Configuration
+  ) {
     this.actionUrl = `${_configuration.apiHost}${_configuration.apiPrefix}login`;
     // set token if saved in local storage
     this.token = this.getToken();
   }
 
-  public login(username: string, password: string): Observable<any> {
+  public login(username: string, password: string): Observable<boolean> {
     return this._http.post(this.actionUrl, {username: username, password: password})
       .map((response: Response) => {
         if (!response || !response.json || !response.json()) {

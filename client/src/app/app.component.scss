@@ -1,0 +1,16 @@
+.footer {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 60px;
+  background: #000;
+  color: #D4D4D4;
+  padding: 10px 50px;
+
+  & img {
+    height: 40px;
+    display: inline-block;
+    vertical-align: middle;
+  }
+}

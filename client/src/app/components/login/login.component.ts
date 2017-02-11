@@ -1,27 +1,29 @@
-import {Component, OnInit} from '@angular/core';
-import 'rxjs/add/operator/map';
-import {Router} from '@angular/router';
-import {AuthenticationService} from '../../services/authentication.service';
+import { Component, OnInit } from '@angular/core';
+import { Router } from '@angular/router';
+import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['login.component.scss']
 })
 export class LoginComponent implements OnInit {
-  title = 'app works';
+  public username = '';
+  public password = '';
+  public authenticating = false;
 
-  constructor(private _router: Router,
-              private _authenticationService: AuthenticationService) {
-  }
+  public constructor(
+    private _router: Router,
+    private _authenticationService: AuthenticationService
+  ) {}
 
   public ngOnInit(): void {
     // reset login status
     this._authenticationService.logout();
   }
 
-  public login(username: string, password: string) {
-    this._authenticationService.login(username, password)
+  public login(username: string, password: string): void {
+    this.authenticating = true;
+    this._authenticationService.login(username, password).finally(() => this.authenticating = false)
       .subscribe(result => {
         if (result) {
           this._router.navigate(['./things']);

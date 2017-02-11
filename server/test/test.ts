@@ -9,7 +9,7 @@ describe('A user', function() {
     let user = <User>null;
 
     before(() => {
-      user = new User('testuserid', 'password', 'testusername');
+      user = new User('testuserid', 'password', 'firstname', 'lastname', 'companyname');
     });
 
     it('should have a salt', () => {

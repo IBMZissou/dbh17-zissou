@@ -1,20 +1,37 @@
-/* tslint:disable:no-unused-variable */
-import { async, ComponentFixture, TestBed } from '@angular/core/testing';
-import { By } from '@angular/platform-browser';
-import { DebugElement } from '@angular/core';
-
+import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { LoginComponent } from './login.component';
+import { FormsModule } from '@angular/forms';
+import { RouterTestingModule } from '@angular/router/testing';
+import { AuthenticationService } from '../../services/authentication.service';
+import { Observable } from 'rxjs';
+
+class MockAuthenticationService {
+  public logout(): void  {
+  }
+
+  public login(username: string, password: string): Observable<boolean> {
+    return Observable.of(false);
+  }
+}
 
 describe('LoginComponent', () => {
   let component: LoginComponent;
   let fixture: ComponentFixture<LoginComponent>;
 
-  beforeEach(async(() => {
+  beforeEach(() => {
     TestBed.configureTestingModule({
-      declarations: [ LoginComponent ]
-    })
-    .compileComponents();
-  }));
+      declarations: [
+        LoginComponent
+      ],
+      providers: [
+        { provide: AuthenticationService, useClass: MockAuthenticationService }
+      ],
+      imports: [
+        RouterTestingModule,
+        FormsModule
+      ]
+    });
+  });
 
   beforeEach(() => {
     fixture = TestBed.createComponent(LoginComponent);
