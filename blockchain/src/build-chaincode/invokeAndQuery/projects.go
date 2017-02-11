@@ -7,6 +7,7 @@ import (
 	"errors"
 	"build-chaincode/util"
 	"fmt"
+	"crypto/md5"
 )
 
 func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error {
@@ -109,9 +110,58 @@ func GetProjectByID(stub shim.ChaincodeStubInterface, projectID string) (entitie
 }
 
 func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp int64) error {
-	fmt.Println(stub)
-	fmt.Println(projectID)
-	fmt.Println(timestamp)
+	project, err := GetProjectByID(stub, projectID)
+	if err != nil {
+		return errors.New("Error while getting project, reason: " + err.Error())
+	}
+
+	user, err := util.GetCurrentBlockchainUser(stub)
+	if err != nil {
+		return entities.Company{}, errors.New("Unable to retrieve user, reason: " + err.Error())
+	}
+
+	userCompany, err := util.GetCompanyByCertificate(stub)
+	if err != nil {
+		return entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())
+	}
+
+	if userCompany.CompanyID != project.Freelancer && userCompany.CompanyID != project.Client {
+		return errors.New("Current user doesn't belong to either the client or freelancer company")
+	}
+
+	userRole, err := GetUserRole(userCompany.CompanyID, project)
+	if err != nil {
+		return err
+	}
+
+	projectHash := createProjectHash(project)
+
+	signature := &entities.Signature{timestamp, projectHash, user.UserID}
+
+	if userRole == "freelancer" {
+		project.Signatures.FreelancerSignature = signature;
+	} else if userRole == "client" {
+		project.Signatures.ClientSignature = signature;
+	}
+
+	if project.Signatures.FreelancerSignature.Hash == project.Signatures.ClientSignature.Hash {
+		project.Signatures.SignedByBothParties = true;
+	}
 
 	return nil
+}
+
+func GetUserRole (companyID string, project entities.Project) (string, error) {
+	if companyID == project.Freelancer {
+		return "freelancer", nil
+	} else if companyID == project.Client {
+		return "client", nil
+	} else {
+		return "", errors.New("Can't find the role")
+	}
+}
+
+func createProjectHash (project entities.Project) string {
+	data := []byte(project)
+	return md5.Sum(data)
 }
