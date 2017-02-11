@@ -136,7 +136,7 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 
 	projectHash := createProjectHash(project)
 
-	signature := entities.Signature{timestamp, projectHash, user.UserID}
+	signature := entities.Signature{Timestamp: timestamp, Hash: projectHash, UserID: user.UserID}
 
 	if userRole == "freelancer" {
 		project.Signatures.FreelancerSignature = signature;
