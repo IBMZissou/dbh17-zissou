@@ -59,7 +59,10 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		projectID := args[0]
 		timeStamp := util.StringToDate(args[1])
 
-		invokeAndQuery.SignAgreement(stub, projectID, timeStamp)
+		err := invokeAndQuery.SignAgreement(stub, projectID, timeStamp)
+		if err != nil {
+			return nil, err
+		}
 
 		return nil, nil
 	}

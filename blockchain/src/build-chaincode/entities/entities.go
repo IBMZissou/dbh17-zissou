@@ -50,7 +50,19 @@ type Project struct {
 	CreatorID	string	`json:"creatorID"`
 	Status		string	`json:"status"`
 	LastUpdated	int64	`json:"lastUpdated"`
-	Agreement	Agreement
+	Signatures	Signatures
+}
+
+type Signatures struct {
+	SignedByBothParties bool
+	FreelancerSignature Signature
+	ClientSignature     Signature
+}
+
+type Signature struct {
+	Timestamp int64
+	Hash      string
+	UserID    string
 }
 
 type UserAuthenticationResult struct {
