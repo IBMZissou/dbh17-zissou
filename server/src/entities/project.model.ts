@@ -1,12 +1,17 @@
 'use strict';
 
 import * as shortID from 'shortid';
+import { Agreement } from './Agreement';
 
 export class Project {
     private _projectID: string;
     private _creatorID: string;
+    private _lastUpdated: number;
+    private _status: string;
+    private _agreement: Agreement;
 
-    public constructor(private _freelancer: string,
+    public constructor(private _projectName: string,
+                       private _freelancer: string,
                        private _client: string,
                        private _startDate: number,
                        private _endDate: number,
@@ -18,6 +23,9 @@ export class Project {
                        private _location: string,
                        private _hoursPerWeek: number) {
         this._projectID = shortID.generate();
+        this._lastUpdated = new Date().getTime();
+        this._status = 'Unsigned';
+        this._agreement = new Agreement();
     }
 
     public get projectID(): string {
@@ -72,9 +80,26 @@ export class Project {
         return this._hoursPerWeek;
     }
 
+    public get lastUpdated(): number {
+        return this._lastUpdated;
+    }
+
+    public get status(): string {
+        return this._status;
+    }
+
+    public get projectName(): string {
+        return this._projectName;
+    }
+
+    public get agreement(): Agreement {
+        return this._agreement;
+    }
+
     public toJSON(): any {
         return {
             'projectID': this.projectID,
+            'projectName': this.projectName,
             'freelancer': this.freelancer,
             'client': this.client,
             'startDate': this.startDate,
@@ -86,7 +111,10 @@ export class Project {
             'jobRequirements': this.jobRequirements,
             'location': this.location,
             'hoursPerWeek': this.hoursPerWeek,
-            'creatorID': this.creatorID
+            'creatorID': this.creatorID,
+            'status': this.status,
+            'lastUpdated': this.lastUpdated,
+            'agreement': this.agreement
         };
     }
 }
