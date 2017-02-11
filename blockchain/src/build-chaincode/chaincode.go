@@ -104,6 +104,13 @@ func (t *Chaincode) GetQueryResult(stub shim.ChaincodeStubInterface, functionNam
 		}
 
 		return company, nil
+	}  else if functionName == "getProjects" {
+		projects, err := invokeAndQuery.GetProjects(stub)
+		if err != nil {
+			return nil, errors.New("could not retrieve company, reason: " + err.Error())
+		}
+
+		return projects, nil
 	}
 
 	return nil, errors.New("Received unknown query function name")
