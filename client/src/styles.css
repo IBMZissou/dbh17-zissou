@@ -6,3 +6,8 @@ html {
 body {
   position: relative;
 }
+
+.divider-column {
+  position: relative;
+  padding: 0 !important;
+}
