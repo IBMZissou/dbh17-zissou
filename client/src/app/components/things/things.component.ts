@@ -1,6 +1,6 @@
 import { Component, OnInit } from '@angular/core';
 import { ThingService } from '../../services/thing.service';
-import { CompanyInfoService } from '../../services/companyInfo.service';
+import { CompanyInfoService } from '../../services/companyinfo.service';
 
 @Component({
   templateUrl: './things.component.html',
