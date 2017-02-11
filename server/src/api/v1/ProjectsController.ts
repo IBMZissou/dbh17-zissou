@@ -29,6 +29,7 @@ export class ProjectsController {
             request.body.endDate,
             request.body.budget,
             request.body.paymentType,
+            request.body.paymentTrigger,
             request.body.description,
             request.body.deliverables,
             request.body.jobRequirements,
