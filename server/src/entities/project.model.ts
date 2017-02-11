@@ -1,7 +1,7 @@
 'use strict';
 
 import * as shortID from 'shortid';
-import { Signatures } from './Signatures';
+import { Signatures } from './signatures.model';
 
 export class Project {
     private _projectID: string;

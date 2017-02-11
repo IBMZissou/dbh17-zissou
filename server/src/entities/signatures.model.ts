@@ -1,4 +1,4 @@
-import { Signature } from './Signature';
+import { Signature } from './signature.model';
 
 export class Signatures {
     private _freelancerSignature: Signature;
