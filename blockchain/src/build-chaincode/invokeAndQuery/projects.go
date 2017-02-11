@@ -57,7 +57,7 @@ func GetProjects(stub shim.ChaincodeStubInterface) ([]entities.Project, error) {
 
 	projectsIndex, err := util.GetIndex(stub, util.ProjecstIndexName)
 	if err != nil {
-		return []entities.Project{}, errors.New("Unable to retrieve thingsIndex, reason: " + err.Error())
+		return []entities.Project{}, errors.New("Unable to retrieve projectsIndex, reason: " + err.Error())
 	}
 
 	projects := []entities.Project{}
@@ -79,4 +79,28 @@ func GetProjects(stub shim.ChaincodeStubInterface) ([]entities.Project, error) {
 	}
 
 	return projects, nil
+}
+
+func GetProjectByID(stub shim.ChaincodeStubInterface, projectID string) (entities.Project, error) {
+	userCompany, err := util.GetCompanyByCertificate(stub)
+	if err != nil {
+		return entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())
+	}
+
+	projectAsBytes, err := stub.GetState(projectID)
+	if err != nil {
+		return entities.Project{}, errors.New("Could not retrieve project for ID " + projectID + " reason: " + err.Error())
+	}
+
+	var project entities.Project
+	err = json.Unmarshal(projectAsBytes, &project)
+	if err != nil {
+		return entities.Project{}, errors.New("Error while unmarshalling projectAsBytes, reason: " + err.Error())
+	}
+
+	if project.Freelancer == userCompany.CompanyID || project.Client == userCompany.CompanyID {
+		return project, nil
+	}
+
+	return entities.Project{}, nil
 }
