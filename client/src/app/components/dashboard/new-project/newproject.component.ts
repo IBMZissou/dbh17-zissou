@@ -1,5 +1,5 @@
 import { Component, OnInit } from '@angular/core';
-import { Project } from '../../../models/project.model';
+import { ProjectWizardData } from '../../../models/project-wizard-data.model';
 import { CompanyInfoService } from '../../../services/companyinfo.service';
 import { KvKCompany } from '../../../models/kvkcompany.model';
 
@@ -9,7 +9,7 @@ import { KvKCompany } from '../../../models/kvkcompany.model';
 })
 export class NewProjectComponent implements OnInit {
   public currentStep = 0;
-  public project = new Project();
+  public project = new ProjectWizardData();
 
   public constructor(
     private companyInfoService: CompanyInfoService

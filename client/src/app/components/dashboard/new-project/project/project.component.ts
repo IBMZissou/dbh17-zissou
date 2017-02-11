@@ -1,5 +1,5 @@
 import { Component, Input, EventEmitter, Output } from '@angular/core';
-import { Project } from '../../../../models/project.model';
+import { ProjectWizardData } from '../../../../models/project-wizard-data.model';
 
 @Component({
   selector: 'np-project',
@@ -7,7 +7,7 @@ import { Project } from '../../../../models/project.model';
 })
 export class NewProjectProjectComponent {
   @Input()
-  public project: Project;
+  public project: ProjectWizardData;
 
   @Output()
   public previousClicked = new EventEmitter<void>();

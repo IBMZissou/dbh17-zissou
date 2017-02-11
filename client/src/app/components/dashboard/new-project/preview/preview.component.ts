@@ -1,5 +1,5 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
-import { Project } from '../../../../models/project.model';
+import { ProjectWizardData } from '../../../../models/project-wizard-data.model';
 
 @Component({
   selector: 'np-preview',
@@ -7,7 +7,7 @@ import { Project } from '../../../../models/project.model';
 })
 export class NewProjectPreviewComponent {
   @Input()
-  public project: Project;
+  public project: ProjectWizardData;
 
   @Output()
   public previousClicked = new EventEmitter<void>();

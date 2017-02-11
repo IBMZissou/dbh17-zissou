@@ -47,7 +47,6 @@ export class CompanyInfoService {
     })).map(res => res.json());
   }
 
-
   public getCompanyOfCurrentUser(): Observable<KvKCompany> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
     return this.getCompanyByKvkNumber(currentUser.companyID)

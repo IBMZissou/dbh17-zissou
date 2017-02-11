@@ -1,20 +1,15 @@
-export class ProjectFreelancer {
-  public companyName: string;
-  public kvkNumber: number;
-  public address: string;
-  public zipcode: string;
-  public firstName: string;
-  public lastName: string;
-}
-
-export class ProjectClient {
-  public companyName: string;
-  public kvkNumber: number;
-  public address: string;
-  public zipcode: string;
-}
-
 export class Project {
-  public freelancer: ProjectFreelancer = new ProjectFreelancer();
-  public client: ProjectClient = new ProjectClient();
+  public projectName: string;
+  public freelancer: string;
+  public client: string;
+  public startDate: number;
+  public endDate: number;
+  public budget: number;
+  public paymentType: string;
+  public paymentTrigger: string;
+  public description: string;
+  public deliverables: string;
+  public jobRequirements: string[];
+  public location: string;
+  public hoursPerWeek: string;
 }
