@@ -4,6 +4,7 @@ import * as shortID from 'shortid';
 
 export class Project {
     private _projectID: string;
+    private _creatorID: string;
 
     public constructor(private _freelancer: string,
                        private _client: string,
@@ -11,8 +12,7 @@ export class Project {
                        private _endDate: number,
                        private _budget: number,
                        private _paymentType: string,
-                       private _deliverables: string,
-                       private _creatorID: string) {
+                       private _deliverables: string) {
         this._projectID = shortID.generate();
     }
 
