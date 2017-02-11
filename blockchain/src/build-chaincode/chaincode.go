@@ -8,6 +8,7 @@ import (
 	"os"
 	"build-chaincode/util"
 	"build-chaincode/entities"
+	"build-chaincode/invokeAndQuery"
 )
 
 var logger = shim.NewLogger("zissou")
@@ -52,6 +53,8 @@ func (t *Chaincode) Invoke(stub shim.ChaincodeStubInterface, functionName string
 		util.StoreObjectInChain(stub, thing.ThingID, util.ThingsIndexName, thingAsBytes)
 
 		return nil, nil
+	} else if functionName == "createProject" {
+		return nil, invokeAndQuery.CreateProject(stub, args[0])
 	}
 
 	return nil, errors.New("Received unknown invoke function name")
