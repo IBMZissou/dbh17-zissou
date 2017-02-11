@@ -3,7 +3,6 @@ import { ThingService } from '../../services/thing.service';
 import { CompanyInfoService } from '../../services/companyInfo.service';
 
 @Component({
-  selector: 'app-things',
   templateUrl: './things.component.html',
   styleUrls: ['./things.component.css']
 })
