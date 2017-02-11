@@ -6,8 +6,6 @@ import (
 	"encoding/json"
 	"errors"
 	"build-chaincode/util"
-	"fmt"
-	"crypto/md5"
 )
 
 func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error {
@@ -117,12 +115,12 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 
 	user, err := util.GetCurrentBlockchainUser(stub)
 	if err != nil {
-		return entities.Company{}, errors.New("Unable to retrieve user, reason: " + err.Error())
+		return errors.New("Unable to retrieve user, reason: " + err.Error())
 	}
 
 	userCompany, err := util.GetCompanyByCertificate(stub)
 	if err != nil {
-		return entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())
+		return errors.New("Error while getting user company, reason: " + err.Error())
 	}
 
 	if userCompany.CompanyID != project.Freelancer && userCompany.CompanyID != project.Client {
@@ -134,9 +132,9 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 		return err
 	}
 
-	projectHash := createProjectHash(project)
+	//projectHash := createProjectHash(project)
 
-	signature := &entities.Signature{timestamp, projectHash, user.UserID}
+	signature := entities.Signature{timestamp, "", user.UserID}
 
 	if userRole == "freelancer" {
 		project.Signatures.FreelancerSignature = signature;
@@ -161,8 +159,8 @@ func GetUserRole (companyID string, project entities.Project) (string, error) {
 	}
 }
 
-func createProjectHash (project entities.Project) string {
-	// TODO only include certain fields inside the hash, otherwise the hashes will never match
-	data := []byte(project)
-	return md5.Sum(data)
-}
+//func createProjectHash (project entities.Project) string {
+//	// TODO only include certain fields inside the hash, otherwise the hashes will never match
+//	data := []byte(project)
+//	return md5.Sum(data)
+//}
