@@ -149,6 +149,18 @@ func SignAgreement(stub shim.ChaincodeStubInterface, projectID string, timestamp
 		project.Status = "Signed"
 	}
 
+	project.LastUpdated = timestamp
+
+	projectAsBytes, err := json.Marshal(project)
+	if err != nil {
+		return errors.New("Error in marshalling project" + err.Error())
+	}
+
+	err = stub.PutState(projectID, projectAsBytes)
+	if err != nil {
+		return errors.New("Could not store project" + err.Error())
+	}
+
 	return nil
 }
 
