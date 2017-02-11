@@ -1,11 +1,24 @@
 {
   "users": [
     {
+      "userID": "wouter",
+      "firstName": "Wouter",
+      "lastName": "Haasnoot",
+      "password": "passw0rd",
+      "companyID": "14078586",
+      "attributes": [
+        {
+          "name": "userID",
+          "value": "wouter"
+        }
+      ]
+    },
+    {
       "userID": "john",
       "firstName": "John",
       "lastName": "Johnson",
       "password": "passw0rd",
-      "companyID": "8765456",
+      "companyID": "14073685",
       "attributes": [
         {
           "name": "userID",
