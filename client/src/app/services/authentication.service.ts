@@ -35,7 +35,7 @@ export class AuthenticationService {
 
         // store username and jwt token in local storage to keep user logged in between page refreshes
         localStorage.setItem(this.TOKEN_KEY, JSON.stringify({token}));
-        localStorage.setItem(this.USER_KEY,  JSON.stringify({user}));
+        localStorage.setItem(this.USER_KEY, JSON.stringify({user}));
 
         return true;
       }).catch((error: any) => Observable.throw(error.json().error || 'Server error'));

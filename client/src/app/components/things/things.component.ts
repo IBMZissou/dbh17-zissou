@@ -20,8 +20,6 @@ export class ThingsComponent implements OnInit {
       this.things = things;
     });
 
-    this._companyInfoService.getCompanyByKvkNumber("14060324").subscribe(company => {
-      console.log(company);
-    });
+    this._companyInfoService.getCompanyOfCurrentUser();
   }
 }

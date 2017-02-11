@@ -14,15 +14,15 @@
       ]
     },
     {
-      "userID": "john",
-      "firstName": "John",
-      "lastName": "Johnson",
+      "userID": "ashley",
+      "firstName": "Ashley",
+      "lastName": "Liaw",
       "password": "passw0rd",
       "companyID": "14073685",
       "attributes": [
         {
           "name": "userID",
-          "value": "john"
+          "value": "ashley"
         }
       ]
     }
@@ -41,12 +41,12 @@
   ],
   "companies": [
     {
-      "companyID": "8765456",
-      "name": "Zissou Corp."
+      "companyID": "14078586",
+      "name": "Wouter Haasnoot"
     },
     {
-      "companyID": "768592",
-      "name": "Jaguar Shark inc."
+      "companyID": "14073685",
+      "name": "WindVision B.V."
     }
   ]
 }
