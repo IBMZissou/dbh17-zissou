@@ -1,0 +1,25 @@
+.login-box {
+  .content {
+    position: relative;
+  }
+
+  padding-top: 25vh;
+  width: 50%;
+  margin-left: 25%;
+
+  & h1 {
+    margin-bottom: 50px;
+    text-align: center;
+  }
+}
+
+.login-background {
+  position: fixed;
+  top: 0;
+  right: 0;
+  left: 0;
+  bottom: 0;
+  z-index: -99999;
+  background: url('/assets/images/login_bg.png');
+  background-size: cover;
+}

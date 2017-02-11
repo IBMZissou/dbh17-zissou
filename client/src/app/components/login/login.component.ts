@@ -3,13 +3,13 @@ import { Router } from '@angular/router';
 import { AuthenticationService } from '../../services/authentication.service';
 
 @Component({
-  selector: 'app-login',
   templateUrl: './login.component.html',
-  styleUrls: ['./login.component.css']
+  styleUrls: ['login.component.scss']
 })
 export class LoginComponent implements OnInit {
   public username = '';
   public password = '';
+  public authenticating = false;
 
   public constructor(
     private _router: Router,
@@ -22,7 +22,8 @@ export class LoginComponent implements OnInit {
   }
 
   public login(username: string, password: string): void {
-    this._authenticationService.login(username, password)
+    this.authenticating = true;
+    this._authenticationService.login(username, password).finally(() => this.authenticating = false)
       .subscribe(result => {
         if (result) {
           this._router.navigate(['./things']);
