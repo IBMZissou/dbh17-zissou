@@ -41,7 +41,11 @@ type Project struct {
 	EndDate		int	`json:"deadline"`
 	Budget		float64	`json:"budget"`
 	PaymentType	string	`json:"paymentType"`
+	Description	string	`json:"description"`
 	Deliverables	string	`json:"deliverables"`
+	JobRequirements	[]string `json:"jobRequirements"`
+	Location	string	`json:"location"`
+	HoursPerWeek	int	`json:"hoursPerWeek"`
 	CreatorID	string	`json:"creatorID"`
 }
 
