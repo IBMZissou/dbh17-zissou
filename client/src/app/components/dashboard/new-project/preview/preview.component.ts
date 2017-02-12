@@ -1,5 +1,7 @@
 import { Component, Input, Output, EventEmitter } from '@angular/core';
 import { ProjectWizardData } from '../../../../models/project-wizard-data.model';
+import { ProjectService } from '../../../../services/project.service';
+import { Project } from '../../../../models/project.model';
 
 @Component({
   selector: 'np-preview',
@@ -17,6 +19,7 @@ export class NewProjectPreviewComponent {
   public nextClicked = new EventEmitter<void>();
 
   public agreed = false;
+  public submitting = false;
 
   public budgetMethods = {
     hourly: 'Hourly',
@@ -36,14 +39,19 @@ export class NewProjectPreviewComponent {
     'directdebit': 'Direct Debit'
   };
 
-  public submit(): void {
+  public constructor(
+    private projectService: ProjectService
+  ) {}
 
+  public submit(): void {
+    this.submitting = true;
+    this.projectService.createProject(Project.convert(this.project)).finally(() => this.submitting = false).subscribe(
+      () => this.nextClicked.emit(undefined)
+    );
   }
 
   public getStartDateString(): string {
-    console.log(this.project);
     let utc = Date.UTC(this.project.project.startYear, +this.project.project.startMonth - 1, this.project.project.startDay);
-    console.log(utc);
     return new Date(utc).toDateString();
   }
 

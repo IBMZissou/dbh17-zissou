@@ -24,6 +24,7 @@ import {
   AccordionTitleCompatComponent,
   AccordionContentCompatComponent
 } from './components/accordion.compat.component';
+import { ProjectService } from './services/project.service';
 
 @NgModule({
   declarations: [
@@ -55,7 +56,8 @@ import {
     AuthenticationService,
     AuthGuard,
     ThingService,
-    CompanyInfoService
+    CompanyInfoService,
+    ProjectService
   ],
   bootstrap: [AppComponent]
 })

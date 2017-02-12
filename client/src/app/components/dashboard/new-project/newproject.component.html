@@ -56,6 +56,23 @@
     <div *ngSwitchCase="4">
       <np-preview [project]="project" (previousClicked)="previous()" (nextClicked)="next()"></np-preview>
     </div>
+    <div *ngSwitchCase="5">
+      <div class="ui grid">
+        <div class="four wide column"></div>
+        <div class="eight wide column">
+          <div class="ui success message">
+            <div class="header">
+              Submission successful
+            </div>
+            <p>Your project has been submitted. The client will be notified for final sign-off.</p>
+          </div>
+          <a class="ui fluid button" [routerLink]="['/dashboard']">
+            Return to dashboard
+          </a>
+        </div>
+        <div class="four wide column"></div>
+      </div>
+    </div>
   </div>
 
 </div>

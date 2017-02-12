@@ -26,7 +26,7 @@ export class NewProjectComponent implements OnInit {
       return;
     }
 
-    this.project.freelancer.kvkNumber = +company.kvknummer;
+    this.project.freelancer.kvkNumber = company.kvknummer;
     this.project.freelancer.companyName = company.businessName;
     this.project.freelancer.address = (company.street + ' ' + company.houseNumber + ' ' +  company.houseNumberAddition).trim();
     this.project.freelancer.zipcode = company.postalCode;
