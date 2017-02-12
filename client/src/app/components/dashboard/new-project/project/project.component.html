@@ -1,0 +1,131 @@
+<form class="ui form">
+  <div class="ui two column grid">
+    <div class="column">
+      <h4 class="ui dividing header">Project information</h4>
+      <div class="field">
+        <label>Project name</label>
+        <input name="projectName" [(ngModel)]="project.project.projectName" type="text">
+      </div>
+      <div class="field">
+        <label>Project description</label>
+        <textarea name="projectDescription" [(ngModel)]="project.project.projectDescription" rows="7"></textarea>
+      </div>
+    </div>
+    <div class="column">
+      <h4 class="ui dividing header">Duration</h4>
+      <div class="field">
+        <label>Starting date</label>
+        <div class="three fields">
+          <div class="field">
+            <input name="startDateDay" [(ngModel)]="project.project.startDay" placeholder="Day" type="number" min="1" max="31">
+          </div>
+          <sm-select name="startDateMonth" [(model)]="project.project.startMonth">
+            <option value="">Month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </sm-select>
+          <div class="field">
+            <input name="startDateYear" [(ngModel)]="project.project.startYear" placeholder="Year" type="number" min="1900" max="9999">
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Ending date</label>
+        <div class="three fields">
+          <div class="field">
+            <input name="endDateDay" [(ngModel)]="project.project.endDay" placeholder="Day" type="number" min="1" max="31">
+          </div>
+          <sm-select name="endDateMonth" [(model)]="project.project.endMonth">
+            <option value="">Month</option>
+            <option value="1">January</option>
+            <option value="2">February</option>
+            <option value="3">March</option>
+            <option value="4">April</option>
+            <option value="5">May</option>
+            <option value="6">June</option>
+            <option value="7">July</option>
+            <option value="8">August</option>
+            <option value="9">September</option>
+            <option value="10">October</option>
+            <option value="11">November</option>
+            <option value="12">December</option>
+          </sm-select>
+          <div class="field">
+            <input name="endDateYear" [(ngModel)]="project.project.endYear" placeholder="Year" type="number" min="1900" max="9999">
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="ui two column grid">
+    <div class="column">
+      <h4 class="ui dividing header">Budget information</h4>
+      <div class="field">
+        <label>Budget</label>
+        <div class="two fields">
+          <div class="field">
+            <sm-select name="budgetType" [(model)]="project.project.budgetType">
+              <option value="">Budget Type</option>
+              <option value="hourly">Hourly</option>
+              <option value="weekly">Weekly</option>
+              <option value="montly">Montly</option>
+              <option value="project-based">Project-based</option>
+            </sm-select>
+          </div>
+          <div class="field">
+            <div class="ui left icon input">
+              <i class="euro icon"></i>
+              <input name="budget" placeholder="Amount" [(ngModel)]="project.project.budget" type="number">
+            </div>
+          </div>
+        </div>
+      </div>
+      <div class="field">
+        <label>Payment triggers</label>
+        <sm-select name="paymentTrigger" [(model)]="project.project.paymentTrigger">
+          <option value="">Trigger</option>
+          <option value="default">Default</option>
+          <option value="30days">30 days after</option>
+          <option value="custom">Custom</option>
+        </sm-select>
+      </div>
+    </div>
+    <div class="column">
+      <h4 class="ui dividing header">Payment method</h4>
+      <div class="field">
+        <sm-select name="paymentMethod" [(model)]="project.project.paymentMethod">
+          <option value="">Payment method</option>
+          <option value="invoice">Invoice</option>
+          <option value="directdebit">Direct Debit</option>
+        </sm-select>
+      </div>
+      <div class="field">
+        <label>Additional information</label>
+        <textarea rows="4" name="paymentInfo" [(ngModel)]="project.project.paymentInfo"></textarea>
+      </div>
+    </div>
+  </div>
+</form>
+
+<div class="ui two column grid">
+  <div class="column">
+    <button class="ui yellow button" (click)="previousClicked.emit(undefined)">
+      Previous Step
+    </button>
+  </div>
+  <div class="column right aligned">
+    <button class="ui yellow button" (click)="nextClicked.emit(undefined)">
+      Next Step
+    </button>
+  </div>
+</div>

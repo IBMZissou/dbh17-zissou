@@ -1,8 +1,9 @@
 package entities
 
 type TestData struct {
-	Users     []User     	`json:"users"`
-	Companies []Company  	`json:"companies"`
+	Users     []User        `json:"users"`
+	Companies []Company        `json:"companies"`
+	Projects  []Project        `json:"projects"`
 }
 
 type TestDataElement interface {
@@ -46,6 +47,21 @@ type Project struct {
 	CreatorID	string	`json:"creatorID"`
 	Status		string	`json:"status"`
 	LastUpdated	int64	`json:"lastUpdated"`
+	Signatures	Signatures
+}
+
+type ProjectForTax struct {
+	ProjectID	string	`json:"projectID"`
+	ProjectName	string	`json:"projectName"`
+	Freelancer	string	`json:"freelancer"`
+	Client		string	`json:"client"`
+	StartDate	int64	`json:"startDate"`
+	EndDate		int64	`json:"endDate"`
+	Budget		float64	`json:"budget"`
+	PaymentType	string	`json:"paymentType"`
+	PaymentTrigger	string	`json:"paymentTrigger"`
+	Description	string	`json:"description"`
+	HoursPerWeek	int	`json:"hoursPerWeek"`
 	Signatures	Signatures
 }
 

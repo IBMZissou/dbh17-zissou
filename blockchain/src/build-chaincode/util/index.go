@@ -7,12 +7,12 @@ import (
 )
 
 var UsersIndexName = "_users"
-var ProjecstIndexName = "_projects"
+var ProjectsIndexName = "_projects"
 var CompaniesIndexName = "_companies"
 
 var indexNames = []string{
 	UsersIndexName,
-	ProjecstIndexName,
+	ProjectsIndexName,
 	CompaniesIndexName,
 }
 

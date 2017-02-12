@@ -1,0 +1,100 @@
+<sm-loader [complete]="!submitting" class="inverted" text="Creating contract..."></sm-loader>
+<div class="ui grid">
+  <div class="twelve wide column">
+    <sm-accordion class="fluid styled" [options]="{ exclusive: true }">
+      <sm-accordion-item>
+        <accordion-title>Your Information</accordion-title>
+        <accordion-content>
+          <p><strong>Name</strong>: {{ project.freelancer.firstName }} {{ project.freelancer.lastName }} </p>
+
+          <div class="ui two column grid">
+            <div class="column">
+              <strong>Company name</strong>: {{ project.freelancer.companyName }}
+              <br>
+              <strong>KvK number</strong>: {{ project.freelancer.kvkNumber }}
+            </div>
+            <div class="column">
+              <strong>Address</strong>: {{ project.freelancer.address }}
+              <br>
+              <strong>Zip code</strong>: {{ project.freelancer.zipcode }}
+            </div>
+          </div>
+        </accordion-content>
+      </sm-accordion-item>
+      <sm-accordion-item>
+        <accordion-title>Client Information</accordion-title>
+        <accordion-content>
+          <div class="ui two column grid">
+            <div class="column">
+              <strong>Company name</strong>: {{ project.client.companyName }}
+              <br>
+              <strong>KvK number</strong>: {{ project.client.kvkNumber }}
+            </div>
+            <div class="column">
+              <strong>Address</strong>: {{ project.client.address }}
+              <br>
+              <strong>Zip code</strong>: {{ project.client.zipcode }}
+            </div>
+          </div>
+        </accordion-content>
+      </sm-accordion-item>
+      <sm-accordion-item>
+        <accordion-title>Project Information</accordion-title>
+        <accordion-content>
+          <div class="ui two column grid">
+            <div class="column">
+              <strong>Name</strong>: {{ project.project.projectName }}
+              <br>
+              <strong>Description</strong>: {{ project.project.projectDescription }}
+            </div>
+            <div class="column">
+              <strong>Start date</strong>: {{ getStartDateString() }}
+              <br>
+              <strong>End date</strong>: {{ getEndDateString() }}
+            </div>
+          </div>
+          <div class="ui two column grid">
+            <div class="column">
+              <strong>Budget</strong>: &euro;{{ project.project.budget }} ( {{ budgetMethods[project.project.budgetType] || project.project.budgetType }} )
+              <br>
+              <strong>Payment trigger</strong>: {{ paymentTriggers[project.project.paymentTrigger] || project.project.paymentTrigger }}
+            </div>
+            <div class="column">
+              <strong>Payment method</strong>: {{ paymentMethods[project.project.paymentMethod] || project.project.paymentMethod}}
+              <br>
+              <strong>Additional info</strong>: {{ project.project.paymentInfo }}
+            </div>
+          </div>
+        </accordion-content>
+      </sm-accordion-item>
+    </sm-accordion>
+  </div>
+  <div class="four wide column">
+    <sm-segment>
+      By continuing you agree that the information shown on this screen is accurate.
+
+      <div class="ui divider">
+      </div>
+      <div class="ui checkbox">
+        <input name="agree" [(ngModel)]="agreed" type="checkbox">
+        <label>I agree</label>
+      </div>
+
+      <div class="button-spacer">
+        <button class="ui fluid blue button">Print</button>
+      </div>
+      <div class="button-spacer">
+        <button class="ui fluid green button" [class.disabled]="!agreed" (click)="submit()">Submit</button>
+      </div>
+    </sm-segment>
+  </div>
+</div>
+
+
+<div class="ui two column grid">
+  <div class="column">
+    <button class="ui yellow button" (click)="previousClicked.emit(undefined)">
+      Previous Step
+    </button>
+  </div>
+</div>

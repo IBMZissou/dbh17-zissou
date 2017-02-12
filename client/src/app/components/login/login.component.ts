@@ -26,7 +26,7 @@ export class LoginComponent implements OnInit {
     this._authenticationService.login(username, password).finally(() => this.authenticating = false)
       .subscribe(result => {
         if (result) {
-          this._router.navigate(['./things']);
+          this._router.navigate(['/dashboard']);
         }
       });
   }
