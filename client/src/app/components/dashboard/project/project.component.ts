@@ -1,7 +1,7 @@
 import { Component, OnInit } from '@angular/core';
 import { Project } from '../../../models/project.model';
 import { KvKCompany } from '../../../models/kvkcompany.model';
-import { ActivatedRoute } from '@angular/router';
+import { ActivatedRoute, Router } from '@angular/router';
 import { CompanyInfoService } from '../../../services/companyinfo.service';
 import { ProjectService } from '../../../services/project.service';
 
@@ -15,6 +15,7 @@ export class ProjectComponent implements OnInit {
   public freelancer: KvKCompany;
   public user: any;
   public userNeedsToSign = false;
+  public signing = false;
 
   public budgetMethods = {
     hourly: 'Hourly',
@@ -37,6 +38,7 @@ export class ProjectComponent implements OnInit {
   public agreed = false;
 
   public constructor(
+    private router: Router,
     private activatedRoute: ActivatedRoute,
     private projectService: ProjectService,
     private companyInfoService: CompanyInfoService
@@ -46,7 +48,6 @@ export class ProjectComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (data: any) => this.projectService.getProject(data.id).subscribe(
         (project: Project) => {
-          console.log(project)
           this.project = project;
 
           this.companyInfoService.getCompanyByKvkNumber(project.client).subscribe(
@@ -69,21 +70,19 @@ export class ProjectComponent implements OnInit {
   }
 
   public sign(): void {
-    this.projectService.signProject(this.project.projectID).subscribe(
-      (result: any) => {
-        console.log("project signed")
-        console.log(result)
-      }
-    )
+    this.signing = true;
+    this.projectService.signProject(this.project.projectID).finally(() => this.signing = false).subscribe(
+      (result: any) => this.router.navigate(['/dashboard'])
+    );
   }
 
   private currentUserNeedsToSign(): boolean {
-    if (this.user.companyType == "tax" || this.user.companyType == "chamberOfCommerce") {
-      return false
-    } else if (this.user.companyID == this.project.freelancer && this.project.signatures.freelancerSignature.hash == "") {
-      return true
-    } else if (this.user.companyID == this.project.client && this.project.signatures.clientSignature.hash == "") {
-      return true
+    if (this.user.companyType === 'tax' || this.user.companyType === 'chamberOfCommerce') {
+      return false;
+    } else if (this.user.companyID === this.project.freelancer && this.project.signatures.freelancerSignature.hash === '') {
+      return true;
+    } else if (this.user.companyID === this.project.client && this.project.signatures.clientSignature.hash === '') {
+      return true;
     }
   }
 }
