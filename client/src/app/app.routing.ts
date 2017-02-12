@@ -3,13 +3,20 @@ import { Routes, RouterModule } from '@angular/router';
 import { AuthGuard } from './guards/index';
 import { LoginComponent } from './components/login/login.component';
 import { ThingsComponent } from './components/things/things.component';
+import { DashboardComponent } from './components/dashboard/dashboard.component';
+import { OverviewComponent } from './components/dashboard/overview/overview.component';
+import { NewProjectComponent } from './components/dashboard/new-project/newproject.component';
 
 const appRoutes: Routes = [
-  {path: 'login', component: LoginComponent},
-  {path: 'things', component: ThingsComponent, canActivate: [AuthGuard]},
+  { path: 'login', component: LoginComponent },
+  { path: 'things', component: ThingsComponent, canActivate: [AuthGuard] },
+  { path: 'dashboard', component: DashboardComponent, canActivate: [AuthGuard], children: [
+    { path: '', component: OverviewComponent },
+    { path: 'new', component: NewProjectComponent }
+  ]},
 
   // otherwise redirect to login
-  {path: '**', redirectTo: 'login'}
+  { path: '**', redirectTo: 'login' }
 ];
 
 export const appRoutingProviders: any[] = [];

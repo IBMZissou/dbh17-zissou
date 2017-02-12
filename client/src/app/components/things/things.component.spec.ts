@@ -2,7 +2,7 @@ import { ComponentFixture, TestBed } from '@angular/core/testing';
 import { ThingsComponent } from './things.component';
 import { Observable } from 'rxjs';
 import { ThingService } from '../../services/thing.service';
-import { CompanyInfoService } from '../../services/companyInfo.service';
+import { CompanyInfoService } from '../../services/companyinfo.service';
 
 class MockThingService {
   public getThingsByUser(): Observable<any[]> {
