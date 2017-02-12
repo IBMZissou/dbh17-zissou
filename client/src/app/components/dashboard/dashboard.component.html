@@ -10,7 +10,7 @@
       <a [routerLink]="['/login']" class="ui item">
         Logout
       </a>
-      <div class="ui item">
+      <div class="ui item" *ngIf="user.companyType == 'company'">
         <a class="ui compact red labeled icon button" [routerLink]="['/dashboard/new']">
           <i class="plus icon"></i>
           Add Project
