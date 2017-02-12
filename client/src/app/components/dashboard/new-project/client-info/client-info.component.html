@@ -1,13 +1,7 @@
 <div class="ui basic segment">
 
-  <div class="ui center aligned">
-    <div class="ui search">
-      <div class="ui icon input">
-        <input class="prompt" placeholder="Search companies..." type="text">
-        <i class="search icon"></i>
-      </div>
-      <div class="results"></div>
-    </div>
+  <div class="ui center aligned search-box">
+    <sm-search placeholder="Search companies..." (onSearch)="searchCompany($event)" [debounce]="500" [loading]="searchingCompany" [icon]="true"></sm-search>
   </div>
   <div class="ui horizontal divider">
     <i class="pencil icon"></i>
