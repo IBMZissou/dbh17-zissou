@@ -8,7 +8,6 @@ import (
 	"build-chaincode/util"
 	"crypto/sha256"
 	"encoding/hex"
-	"fmt"
 )
 
 func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error {
