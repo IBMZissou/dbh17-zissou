@@ -48,13 +48,13 @@ func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error
 	}
 
 	//use the storeobject function to store the project
-	util.StoreObjectInChain(stub, project.ProjectID, util.ProjecstIndexName, projectAsBytes)
+	util.StoreObjectInChain(stub, project.ProjectID, util.ProjectsIndexName, projectAsBytes)
 
 	return nil
 }
 
 func GetProjectsForTax(stub shim.ChaincodeStubInterface) ([]entities.ProjectForTax, error) {
-	projectsIndex, err := util.GetIndex(stub, util.ProjecstIndexName)
+	projectsIndex, err := util.GetIndex(stub, util.ProjectsIndexName)
 	if err != nil {
 		return []entities.ProjectForTax{}, errors.New("Unable to retrieve projectsIndex, reason: " + err.Error())
 	}
@@ -85,7 +85,7 @@ func GetProjectsForCompanies(stub shim.ChaincodeStubInterface)  ([]entities.Proj
 		return []entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())
 	}
 
-	projectsIndex, err := util.GetIndex(stub, util.ProjecstIndexName)
+	projectsIndex, err := util.GetIndex(stub, util.ProjectsIndexName)
 	if err != nil {
 		return []entities.Project{}, errors.New("Unable to retrieve projectsIndex, reason: " + err.Error())
 	}
