@@ -3,7 +3,7 @@
     position: relative;
   }
 
-  padding-top: 25vh;
+  padding-top: 15vh;
   width: 50%;
   margin-left: 25%;
 
@@ -22,4 +22,8 @@
   z-index: -99999;
   background: url('/assets/images/login_bg.png');
   background-size: cover;
+}
+
+.logo {
+  max-width: 100px;
 }
