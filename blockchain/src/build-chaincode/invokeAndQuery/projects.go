@@ -22,7 +22,25 @@ func CreateProject(stub shim.ChaincodeStubInterface, projectAsJson string) error
 		return errors.New("ProjectID is empty")
 	}
 
-	// TODO add validation for all the other fields
+	if project.ProjectName == "" {
+		return errors.New("ProjectName is empty")
+	}
+
+	if project.Freelancer == "" {
+		return errors.New("Freelancer is empty")
+	}
+
+	if project.Client == "" {
+		return errors.New("Client is empty")
+	}
+
+	if project.StartDate > project.EndDate {
+		return errors.New("StartDate is after EndDate")
+	}
+
+	if project.HoursPerWeek <= 0 {
+		return errors.New("Hours per week must be greater than zero")
+	}
 
 	// check if current user belongs to either the freelancer or the client
 	userCompany, err := util.GetCompanyByCertificate(stub)
@@ -79,7 +97,7 @@ func GetProjectsForTax(stub shim.ChaincodeStubInterface) ([]entities.ProjectForT
 	return projects, nil
 }
 
-func GetProjectsForCompanies(stub shim.ChaincodeStubInterface)  ([]entities.Project, error) {
+func GetProjectsForCompanies(stub shim.ChaincodeStubInterface) ([]entities.Project, error) {
 	userCompany, err := util.GetCompanyByCertificate(stub)
 	if err != nil {
 		return []entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())

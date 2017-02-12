@@ -36,7 +36,7 @@ export class Project {
       deliverables: '',
       jobRequirements: [],
       location: '',
-      hoursPerWeek: 0
+      hoursPerWeek: 40
     };
   }
 }
