@@ -1,3 +1,7 @@
+i {
+  cursor: pointer;
+}
+
 .question {
   font-size: 16pt;
   font-weight: bold;
@@ -8,4 +12,9 @@
 .questionnaire-buttons {
   width: 50%;
   margin: auto;
+}
+
+.collapsable {
+  overflow: hidden;
+  margin-bottom: 20px;
 }

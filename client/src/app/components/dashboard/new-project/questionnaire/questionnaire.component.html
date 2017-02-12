@@ -4,10 +4,13 @@
     <sm-progress [progress]="progress"></sm-progress>
     <sm-segment>
       <small>Question {{currentQuestion + 1}} / {{ questions.length }}</small>
+        <i class="help icon" (click)="collapse = !collapse"></i>
       <div class="question">
         {{ questions[currentQuestion] }}
       </div>
-
+      <div class="collapsable" [@collapse]="collapse ? 'closed': 'open'">
+        {{ information[currentQuestion] }}
+      </div>
       <div class="questionnaire-buttons">
         <div class="ui fluid buttons">
           <button class="ui labeled icon button" (click)="yesClicked()">
@@ -25,13 +28,18 @@
   <div *ngIf="!eligible" class="eight wide column">
     <div class="ui negative message">
       <div class="header">
-        Not Eligible
+        Keep in mind
       </div>
-      <p>Based on your answers, you do not not qualify as a freelancer.</p>
+      {{ information[currentQuestion] }}
     </div>
-    <a class="ui fluid button" [routerLink]="['/dashboard']">
-      Return to dashboard
-    </a>
+    <div class="ui fluid buttons">
+      <a class="ui button" [routerLink]="['/dashboard']">
+        Return to dashboard
+      </a>
+      <button class="ui button" (click)="resume()">
+        Continue anyway
+      </button>
+    </div>
   </div>
   <div class="four wide column"></div>
 </div>
