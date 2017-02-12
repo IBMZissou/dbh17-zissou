@@ -103,12 +103,24 @@ func (t *Chaincode) GetQueryResult(stub shim.ChaincodeStubInterface, functionNam
 
 		return company, nil
 	} else if functionName == "getProjects" {
-		projects, err := invokeAndQuery.GetProjects(stub)
+		userCompany, err := util.GetCompanyByCertificate(stub)
 		if err != nil {
-			return nil, errors.New("could not retrieve company, reason: " + err.Error())
+			return []entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())
 		}
 
-		return projects, nil
+		if userCompany.CompanyType == "tax" {
+			projects, err := invokeAndQuery.GetProjectsForTax(stub)
+			if err != nil {
+				return nil, errors.New("could not retrieve company, reason: " + err.Error())
+			}
+			return projects, nil
+		} else {
+			projects, err := invokeAndQuery.GetProjectsForCompanies(stub)
+			if err != nil {
+				return nil, errors.New("could not retrieve company, reason: " + err.Error())
+			}
+			return projects, nil
+		}
 	} else if functionName == "getProjectByID" {
 		project, err := invokeAndQuery.GetProjectByID(stub, args[0])
 		if err != nil {
@@ -186,10 +198,22 @@ func (t *Chaincode) addTestdata(stub shim.ChaincodeStubInterface, testDataAsJson
 	for _, company := range testData.Companies {
 		companyAsBytes, err := json.Marshal(company);
 		if err != nil {
-			return errors.New("Error marshalling companyThing, reason: " + err.Error())
+			return errors.New("Error marshalling company, reason: " + err.Error())
 		}
 
 		err = util.StoreObjectInChain(stub, company.CompanyID, util.CompaniesIndexName, companyAsBytes)
+		if err != nil {
+			return errors.New("error in storing object, reason: " + err.Error())
+		}
+	}
+
+	for _, project := range testData.Projects {
+		projectAsBytes, err := json.Marshal(project);
+		if err != nil {
+			return errors.New("Error marshalling project, reason: " + err.Error())
+		}
+
+		err = util.StoreObjectInChain(stub, project.ProjectID, util.ProjectsIndexName, projectAsBytes)
 		if err != nil {
 			return errors.New("error in storing object, reason: " + err.Error())
 		}
