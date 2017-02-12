@@ -20,6 +20,7 @@ export class Project {
   public creatorID?: string;
   public status?: string;
   public lastUpdated?: number;
+  public signatures?: any;
 
   public static convert(wizardData: ProjectWizardData): Project {
     return {

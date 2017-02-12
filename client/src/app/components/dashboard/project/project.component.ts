@@ -13,6 +13,8 @@ export class ProjectComponent implements OnInit {
   public project: Project;
   public client: KvKCompany;
   public freelancer: KvKCompany;
+  public user: any;
+  public userNeedsToSign = false;
 
   public budgetMethods = {
     hourly: 'Hourly',
@@ -44,6 +46,7 @@ export class ProjectComponent implements OnInit {
     this.activatedRoute.params.subscribe(
       (data: any) => this.projectService.getProject(data.id).subscribe(
         (project: Project) => {
+          console.log(project)
           this.project = project;
 
           this.companyInfoService.getCompanyByKvkNumber(project.client).subscribe(
@@ -53,9 +56,12 @@ export class ProjectComponent implements OnInit {
           this.companyInfoService.getCompanyByKvkNumber(project.freelancer).subscribe(
             (company: KvKCompany) => this.freelancer = company
           );
+
+          this.userNeedsToSign = this.currentUserNeedsToSign();
         }
       )
     );
+    this.user = JSON.parse(localStorage.getItem('currentUser')).user;
   }
 
   public convertDate(timestamp: number): string {
@@ -64,5 +70,18 @@ export class ProjectComponent implements OnInit {
 
   public sign(): void {
 
+  }
+
+  private currentUserNeedsToSign(): boolean {
+    if (this.user.companyType == "tax" || this.user.companyType == "chamberOfCommerce") {
+      console.log("user is tax")
+      return false
+    } else if (this.user.companyID == this.project.freelancer && this.project.signatures.freelancerSignature.hash == "") {
+      console.log("user is freelancer and still needs to sign")
+      return true
+    } else if (this.user.companyID == this.project.client && this.project.signatures.clientSignature.hash == "") {
+      console.log("user is freelancer and still needs to sign")
+      return true
+    }
   }
 }

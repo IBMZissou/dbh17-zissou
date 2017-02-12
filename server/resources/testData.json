@@ -85,17 +85,17 @@
     "creatorID": "ashley",
     "status": "Signed",
     "lastUpdated": 1486857140492,
-    "Signatures": {
-      "SignedByBothParties": true,
-      "FreelancerSignature": {
-        "Timestamp": 1486857140492,
-        "Hash": "d83865f2422cc42a98e7ec255d292010e00bb9a69e76e35f64088e83714a6a3b",
-        "UserID": "ashley"
+    "signatures": {
+      "signedByBothParties": true,
+      "freelancerSignature": {
+        "timestamp": 1486857140492,
+        "hash": "d83865f2422cc42a98e7ec255d292010e00bb9a69e76e35f64088e83714a6a3b",
+        "userID": "ashley"
       },
-      "ClientSignature": {
-        "Timestamp": 1486857140492,
-        "Hash": "d83865f2422cc42a98e7ec255d292010e00bb9a69e76e35f64088e83714a6a3b",
-        "UserID": "ashley"
+      "clientSignature": {
+        "timestamp": 1486857140492,
+        "hash": "d83865f2422cc42a98e7ec255d292010e00bb9a69e76e35f64088e83714a6a3b",
+        "userID": "ashley"
       }
     }
   }]
