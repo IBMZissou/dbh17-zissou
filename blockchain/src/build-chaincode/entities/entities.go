@@ -2,7 +2,6 @@ package entities
 
 type TestData struct {
 	Users     []User     	`json:"users"`
-	Things    []Thing  	`json:"things"`
 	Companies []Company  	`json:"companies"`
 }
 
@@ -24,13 +23,7 @@ type Company struct {
 	TestDataElement 	`json:"-"`
 	CompanyID   	string 	`json:"companyID"`
 	Name	 	string 	`json:"name"`
-}
-
-type Thing struct {
-	TestDataElement    	`json:"-"`
-	ThingID      	string 	`json:"thingID"`
-	SomeProperty 	string 	`json:"someProperty"`
-	UserID    	string 	`json:"userID"`
+	CompanyType	string	`json:"companyType"`
 }
 
 type Project struct {
@@ -43,6 +36,8 @@ type Project struct {
 	Budget		float64	`json:"budget"`
 	PaymentType	string	`json:"paymentType"`
 	PaymentTrigger	string	`json:"paymentTrigger"`
+	PaymentComments	string	`json:"paymentComments"`
+	BillingMethod	string	`json:"billingMethod"`
 	Description	string	`json:"description"`
 	Deliverables	string	`json:"deliverables"`
 	JobRequirements	[]string `json:"jobRequirements"`
@@ -77,8 +72,4 @@ type Users struct {
 
 func (t *User) ID() string {
 	return t.UserID
-}
-
-func (t *Thing) ID() string {
-	return t.ThingID
 }

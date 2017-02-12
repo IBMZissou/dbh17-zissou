@@ -8,42 +8,44 @@ import { UserAuthenticatorMiddleware } from '../../middleware/UserAuthenticatorM
 @JsonController()
 @UseBefore(UserAuthenticatorMiddleware)
 export class ProjectsController {
-    private blockchainClient: BlockchainClient = Container.get(BlockchainClient);
+  private blockchainClient: BlockchainClient = Container.get(BlockchainClient);
 
-    @Get('/projects')
-    public getProjectsForUser(@Req() request: any): any {
-        let enrollmentID = new JSONWebToken(request).getUserID();
+  @Get('/projects')
+  public getProjectsForUser(@Req() request: any): any {
+    let enrollmentID = new JSONWebToken(request).getUserID();
 
-        return this.blockchainClient.query('getProjects', [], enrollmentID);
-    }
+    return this.blockchainClient.query('getProjects', [], enrollmentID);
+  }
 
-    @Post('/projects')
-    public create(@Body() project: Project, @Req() request: any): any {
-        let enrollmentID = new JSONWebToken(request).getUserID();
+  @Post('/projects')
+  public create(@Body() project: Project, @Req() request: any): any {
+    let enrollmentID = new JSONWebToken(request).getUserID();
 
-        let newProject = new Project(
-            request.body.projectName,
-            request.body.freelancer,
-            request.body.client,
-            request.body.startDate,
-            request.body.endDate,
-            request.body.budget,
-            request.body.paymentType,
-            request.body.paymentTrigger,
-            request.body.description,
-            request.body.deliverables,
-            request.body.jobRequirements,
-            request.body.location,
-            request.body.hoursPerWeek
-        );
+    let newProject = new Project(
+      request.body.projectName,
+      request.body.freelancer,
+      request.body.client,
+      request.body.startDate,
+      request.body.endDate,
+      request.body.budget,
+      request.body.paymentType,
+      request.body.paymentTrigger,
+      request.body.paymentComments,
+      request.body.billingMethod,
+      request.body.description,
+      request.body.deliverables,
+      request.body.jobRequirements,
+      request.body.location,
+      request.body.hoursPerWeek
+    );
 
-        return this.blockchainClient.invoke('createProject', [JSON.stringify(newProject), newProject.projectID, new Date().getTime().toString()], enrollmentID);
-    }
+    return this.blockchainClient.invoke('createProject', [JSON.stringify(newProject), newProject.projectID, new Date().getTime().toString()], enrollmentID);
+  }
 
-    @Get('/project/:id')
-    public getProjectById(@Param('id') projectID: string, @Req() request: any): any {
-        let enrollmentID = new JSONWebToken(request).getUserID();
+  @Get('/project/:id')
+  public getProjectById(@Param('id') projectID: string, @Req() request: any): any {
+    let enrollmentID = new JSONWebToken(request).getUserID();
 
-        return this.blockchainClient.query('getProjectByID', [projectID], enrollmentID);
-    }
+    return this.blockchainClient.query('getProjectByID', [projectID], enrollmentID);
+  }
 }

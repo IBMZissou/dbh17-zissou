@@ -25,28 +25,41 @@
           "value": "ashley"
         }
       ]
-    }
-  ],
-  "things": [
-    {
-      "thingID": "1",
-      "userID": "john",
-      "someProperty": "8716948000003"
     },
     {
-      "thingID": "2",
-      "userID": "john",
-      "someProperty": "124914266456"
+      "userID": "paul",
+      "firstName": "Paul",
+      "lastName": "De Vries",
+      "password": "passw0rd",
+      "companyID": "12Belasting",
+      "attributes": [
+        {
+          "name": "userID",
+          "value": "paul"
+        }
+      ]
     }
   ],
   "companies": [
     {
       "companyID": "14078586",
-      "name": "Wouter Haasnoot"
+      "name": "Wouter Haasnoot",
+      "companyType": "company"
     },
     {
       "companyID": "14073685",
-      "name": "WindVision B.V."
+      "name": "WindVision B.V.",
+      "companyType": "company"
+    },
+    {
+      "companyID": "123KVK",
+      "name": "Kamer van Koophandel",
+      "companyType": "chamberOfCommerce"
+    },
+    {
+      "companyID": "12Belasting",
+      "name": "Belastingdienst",
+      "companyType": "tax"
     }
   ]
 }
