@@ -1,3 +1,31 @@
 <div class="ui container">
   <h1>Overview</h1>
+
+  <h3>Projects:</h3>
+  <table class="ui selectable celled table">
+    <thead>
+    <tr>
+      <th>Status</th>
+      <th>Project name</th>
+      <th>Start date</th>
+      <th>End date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let project of projects" (click)="showProject(project)" class="project-row">
+      <td>
+        <div class="ui ribbon label">{{ project.status }}</div>
+      </td>
+      <td>
+        {{ project.projectName }}
+      </td>
+      <td>
+        {{ convertDate(project.startDate) }}
+      </td>
+      <td>
+        {{ convertDate(project.endDate) }}
+      </td>
+    </tr>
+    </tbody>
+  </table>
 </div>

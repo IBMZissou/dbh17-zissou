@@ -1,6 +1,7 @@
 import { ProjectWizardData } from './project-wizard-data.model';
 
 export class Project {
+  public projectID?: string;
   public projectName: string;
   public freelancer: string;
   public client: string;

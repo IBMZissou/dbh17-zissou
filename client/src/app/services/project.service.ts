@@ -8,6 +8,7 @@ import { Project } from '../models/project.model';
 @Injectable()
 export class ProjectService {
   private actionUrl: string;
+  private singluarActionUrl: string;
   private headers: any;
 
   public constructor(
@@ -16,6 +17,7 @@ export class ProjectService {
     private _authenticationService: AuthenticationService
   ) {
     this.actionUrl = `${_configuration.apiHost}${_configuration.apiPrefix}projects`;
+    this.singluarActionUrl = `${_configuration.apiHost}${_configuration.apiPrefix}project`;
     this.headers = _authenticationService.createAuthorizationHeader();
   }
 
@@ -26,6 +28,11 @@ export class ProjectService {
 
   public getProjectsForCurrentUser(): Observable<Project[]> {
     return this._http.get(this.actionUrl, {headers: this.headers})
+      .map(res => res.json());
+  }
+
+  public getProject(projectId: string): Observable<Project> {
+    return this._http.get(this.singluarActionUrl + '/' + encodeURIComponent(projectId), {headers: this.headers})
       .map(res => res.json());
   }
 }

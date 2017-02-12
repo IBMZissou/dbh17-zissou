@@ -25,6 +25,7 @@ import {
   AccordionContentCompatComponent
 } from './components/accordion.compat.component';
 import { ProjectService } from './services/project.service';
+import { ProjectComponent } from './components/dashboard/project/project.component';
 
 @NgModule({
   declarations: [
@@ -33,6 +34,9 @@ import { ProjectService } from './services/project.service';
     ThingsComponent,
     DashboardComponent,
     OverviewComponent,
+
+    ProjectComponent,
+
     NewProjectComponent,
     NewProjectPersonalInfoComponent,
     NewProjectClientInfoComponent,

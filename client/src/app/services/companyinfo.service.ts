@@ -30,7 +30,7 @@ export class CompanyInfoService {
   public getCompanyByKvkNumber(kvkNumber: string): Observable<KvKCompany> {
     return this._http.get(this.actionUrl + '/by-kvknumber/' + kvkNumber + '?' + encodeQueryData({
         'api_key': this._configuration.kvkApiKey
-    })).map(res => res.json());
+    })).map(res => res.json().companies[0]);
   }
 
   public findByName(name: string): Observable<KvKCompany[]> {
