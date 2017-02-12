@@ -37,6 +37,8 @@ type Project struct {
 	Budget		float64	`json:"budget"`
 	PaymentType	string	`json:"paymentType"`
 	PaymentTrigger	string	`json:"paymentTrigger"`
+	PaymentComments	string	`json:"paymentComments"`
+	BillingMethod	string	`json:"billingMethod"`
 	Description	string	`json:"description"`
 	Deliverables	string	`json:"deliverables"`
 	JobRequirements	[]string `json:"jobRequirements"`
