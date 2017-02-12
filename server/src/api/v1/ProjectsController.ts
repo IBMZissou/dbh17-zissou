@@ -1,4 +1,4 @@
-import { Post, Body, Req, JsonController, UseBefore, Get, Param } from 'routing-controllers';
+import { Post, Body, Req, JsonController, UseBefore, Get, Param, Put } from 'routing-controllers';
 import { BlockchainClient } from '../../blockchain/client/blockchainClient';
 import { Container } from 'typedi';
 import { JSONWebToken } from '../../utils/JSONWebToken';
@@ -47,5 +47,13 @@ export class ProjectsController {
     let enrollmentID = new JSONWebToken(request).getUserID();
 
     return this.blockchainClient.query('getProjectByID', [projectID], enrollmentID);
+  }
+
+  @Put('/project/:id/sign')
+  public signProject(@Param('id') projectID: string, @Req() request: any): any {
+    let enrollmentID = new JSONWebToken(request).getUserID();
+    let timestampString = new Date().getTime().toString();
+
+    return this.blockchainClient.invoke('signAgreement', [projectID, timestampString], enrollmentID);
   }
 }
