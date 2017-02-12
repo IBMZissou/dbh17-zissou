@@ -33,14 +33,14 @@ export class CompanyInfoService {
     })).map(res => res.json().companies[0]);
   }
 
-  public findByName(name: string): Observable<KvKCompany[]> {
+  public findByName(name: string): Observable<{companies: KvKCompany[]}> {
     return this._http.get(this.actionUrl + '?' + encodeQueryData({
         'api_key': this._configuration.kvkApiKey,
         'tradename': name
     })).map(res => res.json());
   }
 
-  public findByKvKNumber(kvkNumber: string): Observable<KvKCompany[]> {
+  public findByKvKNumber(kvkNumber: string): Observable<{companies: KvKCompany[]}> {
     return this._http.get(this.actionUrl + '?' + encodeQueryData({
         'api_key': this._configuration.kvkApiKey,
         'kvknummer': kvkNumber
