@@ -4,7 +4,7 @@ import { FormsModule } from '@angular/forms';
 import { RouterTestingModule } from '@angular/router/testing';
 import { AuthenticationService } from '../../services/authentication.service';
 import { Observable } from 'rxjs';
-import { NgSemanticModule } from 'ng-semantic/ng-semantic'
+import { NgSemanticModule } from 'ng-semantic/ng-semantic';
 
 class MockAuthenticationService {
   public logout(): void  {
