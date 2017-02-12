@@ -147,6 +147,8 @@ func GetProjectByID(stub shim.ChaincodeStubInterface, projectID string) (entitie
 
 	if project.Freelancer == userCompany.CompanyID || project.Client == userCompany.CompanyID {
 		return project, nil
+	} else if userCompany.CompanyType == "tax" {
+		return project, nil
 	}
 
 	return entities.Project{}, nil

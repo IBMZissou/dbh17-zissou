@@ -4,7 +4,7 @@ import { CompanyInfoService } from '../../../services/companyinfo.service';
 import { KvKCompany } from '../../../models/kvkcompany.model';
 
 @Component({
-  templateUrl: 'newproject.component.html',
+  templateUrl: './newproject.component.html',
   styleUrls: [ './newproject.component.scss' ]
 })
 export class NewProjectComponent implements OnInit {

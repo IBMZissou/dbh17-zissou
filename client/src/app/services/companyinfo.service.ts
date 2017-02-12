@@ -30,7 +30,7 @@ export class CompanyInfoService {
   public getCompanyByKvkNumber(kvkNumber: string): Observable<KvKCompany> {
     return this._http.get(this.actionUrl + '/by-kvknumber/' + kvkNumber + '?' + encodeQueryData({
         'api_key': this._configuration.kvkApiKey
-    })).map(res => res.json());
+    })).map(res => res.json().companies[0]);
   }
 
   public findByName(name: string): Observable<{companies: KvKCompany[]}> {
@@ -49,7 +49,6 @@ export class CompanyInfoService {
 
   public getCompanyOfCurrentUser(): Observable<KvKCompany> {
     let currentUser = JSON.parse(localStorage.getItem('currentUser')).user;
-    return this.getCompanyByKvkNumber(currentUser.companyID)
-      .map((data: any) => data.returned === 1 ? <KvKCompany>data.companies[0] : undefined);
+    return this.getCompanyByKvkNumber(currentUser.companyID);
   }
 }

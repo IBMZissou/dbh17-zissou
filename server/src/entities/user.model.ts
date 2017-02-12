@@ -10,14 +10,16 @@ export class User {
   private _firstName: string;
   private _lastName: string;
   private _companyID: string;
+  private _companyType: string;
 
-  public constructor(userID: string, password: string, firstName: string, lastName: string, companyID: string) {
+  public constructor(userID: string, password: string, firstName: string, lastName: string, companyID: string, companyType: string) {
     this._userID = userID;
     this._firstName = firstName;
     this._lastName = lastName;
     this._companyID = companyID;
     this._salt = crypto.randomBytes(16).toString('hex');
     this._hash = new Password(password, this.salt).toHash();
+    this._companyType = companyType;
   }
 
   public get userID(): string {
@@ -44,6 +46,10 @@ export class User {
     return this._companyID;
   }
 
+  public get companyType(): string {
+    return this._companyType;
+  }
+
   public toJSON(): any {
     return {
       'userID': this.userID,
@@ -51,7 +57,8 @@ export class User {
       'hash': this.hash,
       'firstName': this.firstName,
       'lastName': this.lastName,
-      'companyID': this.companyID
+      'companyID': this.companyID,
+      'companyType': this.companyType
     };
   }
 }

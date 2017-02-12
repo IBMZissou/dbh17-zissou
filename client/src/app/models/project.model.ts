@@ -1,6 +1,7 @@
 import { ProjectWizardData } from './project-wizard-data.model';
 
 export class Project {
+  public projectID?: string;
   public projectName: string;
   public freelancer: string;
   public client: string;
@@ -19,6 +20,7 @@ export class Project {
   public creatorID?: string;
   public status?: string;
   public lastUpdated?: number;
+  public signatures?: any;
 
   public static convert(wizardData: ProjectWizardData): Project {
     return {
