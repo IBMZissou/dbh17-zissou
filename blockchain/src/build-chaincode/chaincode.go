@@ -213,7 +213,7 @@ func (t *Chaincode) addTestdata(stub shim.ChaincodeStubInterface, testDataAsJson
 			return errors.New("Error marshalling project, reason: " + err.Error())
 		}
 
-		err = util.StoreObjectInChain(stub, project.ProjectID, util.ProjecstIndexName, projectAsBytes)
+		err = util.StoreObjectInChain(stub, project.ProjectID, util.ProjectsIndexName, projectAsBytes)
 		if err != nil {
 			return errors.New("error in storing object, reason: " + err.Error())
 		}
