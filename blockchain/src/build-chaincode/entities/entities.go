@@ -18,6 +18,7 @@ type User struct {
 	Salt     	string 	`json:"salt"`
 	Hash     	string 	`json:"hash"`
 	CompanyID	string	`json:"companyID"`
+	CompanyType	string	`json:"companyType"`
 }
 
 type Company struct {
