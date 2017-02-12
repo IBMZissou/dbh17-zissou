@@ -69,18 +69,20 @@ export class ProjectComponent implements OnInit {
   }
 
   public sign(): void {
-
+    this.projectService.signProject(this.project.projectID).subscribe(
+      (result: any) => {
+        console.log("project signed")
+        console.log(result)
+      }
+    )
   }
 
   private currentUserNeedsToSign(): boolean {
     if (this.user.companyType == "tax" || this.user.companyType == "chamberOfCommerce") {
-      console.log("user is tax")
       return false
     } else if (this.user.companyID == this.project.freelancer && this.project.signatures.freelancerSignature.hash == "") {
-      console.log("user is freelancer and still needs to sign")
       return true
     } else if (this.user.companyID == this.project.client && this.project.signatures.clientSignature.hash == "") {
-      console.log("user is freelancer and still needs to sign")
       return true
     }
   }

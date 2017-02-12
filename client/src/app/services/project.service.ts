@@ -35,4 +35,9 @@ export class ProjectService {
     return this._http.get(this.singluarActionUrl + '/' + encodeURIComponent(projectId), {headers: this.headers})
       .map(res => res.json());
   }
+
+  public signProject(projectId: string): Observable<Project> {
+    return this._http.put(this.singluarActionUrl + '/' + encodeURIComponent(projectId) + '/sign', {headers: this.headers})
+      .map(res => res.json());
+  }
 }

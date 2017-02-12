@@ -117,26 +117,20 @@ func GetProjectByID(stub shim.ChaincodeStubInterface, projectID string) (entitie
 		return entities.Project{}, errors.New("Error while getting user company, reason: " + err.Error())
 	}
 
-	fmt.Println("1")
-
 	projectAsBytes, err := stub.GetState(projectID)
 	if err != nil {
 		return entities.Project{}, errors.New("Could not retrieve project for ID " + projectID + " reason: " + err.Error())
 	}
-
-	fmt.Println("2")
 
 	var project entities.Project
 	err = json.Unmarshal(projectAsBytes, &project)
 	if err != nil {
 		return entities.Project{}, errors.New("Error while unmarshalling projectAsBytes, reason: " + err.Error())
 	}
-	fmt.Println("3")
-	fmt.Println(project)
-	fmt.Println(userCompany)
 
 	if project.Freelancer == userCompany.CompanyID || project.Client == userCompany.CompanyID {
-		fmt.Println("4")
+		return project, nil
+	} else if userCompany.CompanyType == "tax" {
 		return project, nil
 	}
 
