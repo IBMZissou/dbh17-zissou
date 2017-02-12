@@ -7,8 +7,10 @@ export class Project {
   public startDate: number;
   public endDate: number;
   public budget: number;
+  public billingMethod: string;
   public paymentType: string;
   public paymentTrigger: string;
+  public paymentComments: string;
   public description: string;
   public deliverables: string;
   public jobRequirements: string[];
@@ -26,8 +28,10 @@ export class Project {
       startDate: +Date.UTC(wizardData.project.startYear, +wizardData.project.startMonth - 1, wizardData.project.startDay),
       endDate: +Date.UTC(wizardData.project.endYear, +wizardData.project.endMonth - 1, wizardData.project.endDay),
       budget: +wizardData.project.budget,
-      paymentType: wizardData.project.paymentMethod,
+      billingMethod: wizardData.project.paymentMethod,
+      paymentType: wizardData.project.budgetType,
       paymentTrigger: wizardData.project.paymentTrigger,
+      paymentComments: wizardData.project.paymentInfo,
       description: wizardData.project.projectDescription,
       deliverables: '',
       jobRequirements: [],
